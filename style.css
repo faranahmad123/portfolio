@@ -1,0 +1,150 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background-color: #0d1117;
+  color: #c9d1d9;
+  scroll-behavior: smooth;
+}
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+  padding: 2rem 0;
+}
+
+h2 {
+  border-left: 4px solid #58a6ff;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+h3 {
+  color: #58a6ff;
+  margin-top: 1rem;
+}
+
+.header {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: #161b22;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.header h1 {
+  font-size: 2.8rem;
+  color: #58a6ff;
+}
+
+.header p {
+  margin-top: 0.5rem;
+  color: #8b949e;
+}
+
+.socials {
+  margin-top: 1rem;
+}
+
+.socials a {
+  color: #58a6ff;
+  text-decoration: none;
+  margin: 0 12px;
+  transition: color 0.3s ease;
+}
+
+.socials a:hover {
+  color: #79c0ff;
+}
+
+.project-card {
+  background-color: #161b22;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 2rem;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px rgba(88,166,255,0.3);
+}
+
+.project-card img {
+  width: 40%;
+  object-fit: cover;
+}
+
+.project-info {
+  padding: 1rem;
+  width: 60%;
+}
+
+ul {
+  margin-left: 2rem;
+  list-style-type: disc;
+}
+
+.footer {
+  text-align: center;
+  padding: 2rem 0;
+  color: #6e7681;
+}
+
+.fade-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.fade-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .project-card {
+    flex-direction: column;
+  }
+
+  .project-card img,
+  .project-info {
+    width: 100%;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .socials a {
+    display: block;
+    margin: 0.5rem 0;
+  }
+}
+
+/* Back button */
+.back-btn {
+  display: inline-block;
+  margin: 2rem 0;
+  padding: 0.6rem 1.2rem;
+  background-color: #58a6ff;
+  color: #0d1117;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.back-btn:hover {
+  background-color: #79c0ff;
+}
