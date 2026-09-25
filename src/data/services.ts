@@ -50,4 +50,17 @@ export const services: Service[] = [
     ],
     techStack: ["REST", "Postman", "Docker", "Git"],
   },
+  {
+    number: "04",
+    title: "AI & Machine Learning Solutions",
+    description:
+      "Developing end-to-end machine learning systems, Siamese neural networks, and interactive model applications with production pipelines.",
+    capabilities: [
+      "Model Training & Evaluation",
+      "NLP Feature Engineering",
+      "Neural Network Architecture Design",
+      "Interactive ML Demos (Gradio)",
+    ],
+    techStack: ["Python", "TensorFlow", "scikit-learn", "Gradio"],
+  },
 ];

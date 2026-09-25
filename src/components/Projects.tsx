@@ -137,9 +137,30 @@ export default function Projects() {
                   <h3 className="text-white font-bold text-xl">
                     {activeProject.title}
                   </h3>
-                  <p className="text-zinc-500 text-sm mt-2 leading-relaxed">
+                  <p className="text-zinc-400 text-sm mt-2 leading-relaxed">
                     {activeProject.description}
                   </p>
+
+                  {activeProject.bullets && activeProject.bullets.length > 0 && (
+                    <div className="mt-4 space-y-2 border-t border-white/5 pt-3">
+                      <p className="font-mono text-[10px] text-zinc-500 uppercase tracking-wider">
+                        Key Highlights
+                      </p>
+                      <ul className="space-y-1.5">
+                        {activeProject.bullets.slice(0, 3).map((bullet, idx) => (
+                          <li
+                            key={idx}
+                            className="flex items-start gap-2 text-xs text-zinc-400 leading-relaxed"
+                          >
+                            <span className="text-[#00e0ff] text-[10px] mt-0.5 shrink-0">
+                              ✦
+                            </span>
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
 
                   {/* Tech stack */}
                   <div className="flex flex-wrap gap-2 mt-4">

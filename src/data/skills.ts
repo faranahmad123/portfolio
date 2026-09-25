@@ -61,11 +61,25 @@ export const skills: Skill[] = [
     icon: "📱",
   },
   {
-    name: "Flask",
-    category: "Backend",
-    description: "Lightweight Python micro-framework for building REST APIs and backend services.",
+    name: "TensorFlow/Keras",
+    category: "AI / ML",
+    description: "Deep learning framework for training Siamese neural networks, feature extractors, and predictive models.",
     proficiency: "Medium",
-    icon: "🧪",
+    icon: "🧠",
+  },
+  {
+    name: "scikit-learn",
+    category: "AI / ML",
+    description: "Machine learning library for classification, pair sampling, metric evaluation, and feature clustering.",
+    proficiency: "Medium",
+    icon: "📊",
+  },
+  {
+    name: "Gradio",
+    category: "AI / ML",
+    description: "Interactive web interface framework for deploying live machine learning demos and model visualization.",
+    proficiency: "Medium",
+    icon: "🎨",
   },
   {
     name: "OpenCV",
@@ -73,6 +87,20 @@ export const skills: Skill[] = [
     description: "Computer vision library used for image processing, OCR pipelines, and visual AI tasks.",
     proficiency: "Medium",
     icon: "👁️",
+  },
+  {
+    name: "Flask",
+    category: "Backend",
+    description: "Lightweight Python micro-framework for building REST APIs and backend services.",
+    proficiency: "Medium",
+    icon: "🧪",
+  },
+  {
+    name: "Firebase Auth/Realtime DB",
+    category: "Backend",
+    description: "Cloud database and authentication platform powering real-time synchronization, session security, and reactive data streams.",
+    proficiency: "Medium",
+    icon: "🔥",
   },
   {
     name: "Docker",
@@ -95,18 +123,14 @@ export const skills: Skill[] = [
     proficiency: "High",
     icon: "🔀",
   },
-  {
-    name: "Firebase",
-    category: "Backend",
-    description: "Google's BaaS platform providing real-time databases, auth, and cloud functions.",
-    proficiency: "High",
-    icon: "🔥",
-  },
 ];
 
 export const concepts = [
   "RESTful API Integration",
+  "Siamese Neural Networks",
+  "NLP & Word2Vec",
   "Containerization",
   "State Management",
-  "OCR",
+  "Real-time Sync",
+  "OCR & Computer Vision",
 ];

@@ -3,6 +3,7 @@ import { OG_IMAGE } from "@/lib/assets";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://faranahmad.dev"),
   title: "Faran Ahmad | Software Engineer — React, Angular, Flutter & Docker",
   description:
     "Frontend-focused Software Engineer building responsive React & Angular SPAs, cross-platform Flutter apps, and containerized deployments with Docker. Based in Pakistan.",
