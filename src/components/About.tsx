@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { PROFILE_IMAGE, RESUME_PATH } from "@/lib/assets";
 import SectionHeading from "./SectionHeading";
@@ -33,32 +34,33 @@ export default function About() {
   const [imgError, setImgError] = useState(false);
 
   return (
-    <section id="about" className="py-24 md:py-32">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="about" className="py-24 md:py-32 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
         <SectionHeading
           number="01"
           label="The Architect"
           subtitle="Behind the code."
         />
 
-        <div className="mt-16 grid lg:grid-cols-3 gap-8">
+        <div className="mt-12 sm:mt-16 grid lg:grid-cols-3 gap-8 sm:gap-10">
           {/* Profile Card column */}
           <motion.div
             initial={{ opacity: 0, x: shouldReduce ? 0 : -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col items-center"
+            className="flex flex-col items-center w-full"
           >
             {/* Tall / portrait photo card (aspect-[4/5] ratio, full-bleed, edge-to-edge) */}
-            <div className="relative w-full max-w-[340px] sm:max-w-none aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 bg-[#090a0f] shadow-2xl shadow-[#00e0ff]/5 group">
-              {/* Full-bleed Photo */}
+            <div className="relative w-full max-w-[280px] min-[375px]:max-w-[320px] sm:max-w-[340px] aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 bg-[#090a0f] shadow-2xl shadow-[#00e0ff]/5 group mx-auto">
+              {/* Full-bleed Photo using next/image with fill */}
               {!imgError ? (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
+                <Image
                   src={PROFILE_IMAGE}
                   alt="Faran Ahmad"
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 select-none pointer-events-none"
+                  fill
+                  sizes="(max-width: 640px) 320px, 340px"
+                  className="object-cover object-top transition-transform duration-700 group-hover:scale-105 select-none pointer-events-none"
                   onError={() => setImgError(true)}
                 />
               ) : (
@@ -69,35 +71,35 @@ export default function About() {
               )}
 
               {/* Top dark gradient scrim for upper badges */}
-              <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-[#07080c]/90 via-[#07080c]/45 to-transparent pointer-events-none z-10" />
+              <div className="absolute top-0 inset-x-0 h-24 sm:h-28 bg-gradient-to-b from-[#07080c]/90 via-[#07080c]/45 to-transparent pointer-events-none z-10" />
 
               {/* Bottom dark gradient scrim for role tag pills */}
-              <div className="absolute bottom-0 inset-x-0 h-36 bg-gradient-to-t from-[#07080c] via-[#07080c]/80 to-transparent pointer-events-none z-10" />
+              <div className="absolute bottom-0 inset-x-0 h-32 sm:h-36 bg-gradient-to-t from-[#07080c] via-[#07080c]/80 to-transparent pointer-events-none z-10" />
 
               {/* Top-left: circular icon badge */}
-              <div className="absolute top-4 left-4 z-20 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/15 flex items-center justify-center text-[#00e0ff] shadow-lg">
+              <div className="absolute top-3.5 sm:top-4 left-3.5 sm:left-4 z-20 w-8 sm:w-9 h-8 sm:h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/15 flex items-center justify-center text-[#00e0ff] shadow-lg">
                 <svg className="w-4 h-4 text-[#00e0ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 004 11m0 0a8 8 0 00.5 2.75" />
                 </svg>
               </div>
 
               {/* Top-right: "Available for work" pill badge */}
-              <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-emerald-500/30 shadow-lg">
+              <div className="absolute top-3.5 sm:top-4 right-3.5 sm:right-4 z-20 flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-emerald-500/30 shadow-lg">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
                 </span>
-                <span className="font-mono text-[10px] font-medium text-emerald-300">
+                <span className="font-mono text-[9px] sm:text-[10px] font-medium text-emerald-300">
                   Available for work
                 </span>
               </div>
 
               {/* Bottom overlay: role tag pills directly on the photo */}
-              <div className="absolute bottom-4 inset-x-4 z-20 flex flex-wrap gap-2 justify-center">
+              <div className="absolute bottom-3.5 sm:bottom-4 inset-x-3 sm:inset-x-4 z-20 flex flex-wrap gap-1.5 sm:gap-2 justify-center">
                 {["Frontend", "DevOps", "Mobile"].map((tag) => (
                   <span
                     key={tag}
-                    className="font-mono text-[11px] px-3 py-1 rounded-full border border-white/15 text-white/90 bg-black/60 backdrop-blur-md shadow-sm transition-colors hover:border-[#00e0ff]/40 hover:text-[#00e0ff]"
+                    className="font-mono text-[10px] sm:text-[11px] px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full border border-white/15 text-white/90 bg-black/60 backdrop-blur-md shadow-sm transition-colors hover:border-[#00e0ff]/40 hover:text-[#00e0ff]"
                   >
                     {tag}
                   </span>
@@ -105,7 +107,7 @@ export default function About() {
               </div>
             </div>
 
-            {/* Below the photo card (outside it, in normal flow): Name, Location & Resume */}
+            {/* Below the photo card: Name, Location & Resume */}
             <div className="text-center mt-4 flex flex-col items-center">
               <h3 className="text-white font-bold text-xl">Faran Ahmad</h3>
               <p className="font-mono text-xs text-zinc-400 mt-1">
@@ -115,7 +117,7 @@ export default function About() {
                 href={RESUME_PATH}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glow-btn glow-btn-outline text-xs px-4 py-2 mt-3 inline-flex items-center gap-2 group"
+                className="glow-btn glow-btn-outline text-xs px-4 py-2 mt-3 inline-flex items-center gap-2 group min-h-[44px]"
               >
                 <svg className="w-3.5 h-3.5 text-[#00e0ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -129,14 +131,14 @@ export default function About() {
           </motion.div>
 
           {/* About text + highlights */}
-          <div className="lg:col-span-2 space-y-8">
+          <div className="lg:col-span-2 space-y-6 sm:space-y-8">
             <div className="space-y-4">
               <motion.p
                 initial={{ opacity: 0, y: shouldReduce ? 0 : 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-zinc-400 leading-relaxed"
+                className="text-zinc-400 text-sm sm:text-base leading-relaxed"
               >
                 Frontend-focused Software Engineer with hands-on internship
                 experience building responsive React and Angular SPAs,
@@ -159,7 +161,7 @@ export default function About() {
                   href={RESUME_PATH}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="glow-btn glow-btn-primary text-xs inline-flex items-center gap-2 group"
+                  className="glow-btn glow-btn-primary text-xs inline-flex items-center gap-2 group min-h-[44px]"
                 >
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -172,8 +174,8 @@ export default function About() {
               </motion.div>
             </div>
 
-            {/* 4 highlight cards */}
-            <div className="grid sm:grid-cols-2 gap-4">
+            {/* 4 highlight cards (1 col on mobile, 2 cols on sm+) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
               {highlights.map((h, i) => (
                 <motion.div
                   key={h.title}
@@ -181,19 +183,19 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
-                  className="glass-card p-5 group hover:border-[#00e0ff]/20 transition-all"
+                  className="glass-card p-4 sm:p-5 group hover:border-[#00e0ff]/20 transition-all"
                 >
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="text-xl">{h.icon}</span>
+                  <div className="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3">
+                    <span className="text-lg sm:text-xl">{h.icon}</span>
                     <h4 className="text-white font-semibold text-sm">
                       {h.title}
                     </h4>
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {h.items.map((item) => (
                       <span
                         key={item}
-                        className="font-mono text-[10px] px-2 py-1 rounded-md border border-white/5 text-zinc-500 bg-white/[0.02]"
+                        className="font-mono text-[9px] sm:text-[10px] px-2 py-1 rounded-md border border-white/5 text-zinc-500 bg-white/[0.02]"
                       >
                         {item}
                       </span>
@@ -209,14 +211,14 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="glass-card p-6 border-l-2 border-l-[#00e0ff]/30"
+              className="glass-card p-5 sm:p-6 border-l-2 border-l-[#00e0ff]/30"
             >
-              <p className="text-zinc-300 italic leading-relaxed">
+              <p className="text-zinc-300 italic text-sm sm:text-base leading-relaxed">
                 &ldquo;Great software connects clean code with real-world
                 deployment.&rdquo;
               </p>
               <div className="flex items-center gap-3 mt-4">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00e0ff]/30 to-[#8b5cf6]/30 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00e0ff]/30 to-[#8b5cf6]/30 flex items-center justify-center shrink-0">
                   <span className="text-xs font-bold text-white">FA</span>
                 </div>
                 <div>

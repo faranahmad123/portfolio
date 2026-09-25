@@ -15,7 +15,7 @@ export interface Experience {
 export interface Education {
   degree: string;
   institution: string;
-  campus: string;
+
   graduated: string;
   cgpa: string;
 }
@@ -40,7 +40,6 @@ export const experience: Experience[] = [
 export const education: Education = {
   degree: "B.Sc. Software Engineering",
   institution: "University of Lahore",
-  campus: "Sargodha Campus",
   graduated: "2026",
-  cgpa: "3.40 / 4.0",
+  cgpa: "3.35 / 4.0",
 };

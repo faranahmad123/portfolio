@@ -29,18 +29,18 @@ export default function Hero() {
       className="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden"
     >
       {/* Background glow orbs */}
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-[#00e0ff]/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-[#8b5cf6]/5 blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-[280px] sm:w-[500px] h-[280px] sm:h-[500px] rounded-full bg-[#00e0ff]/5 blur-[100px] sm:blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[260px] sm:w-[400px] h-[260px] sm:h-[400px] rounded-full bg-[#8b5cf6]/5 blur-[90px] sm:blur-[100px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        {/* Left: Text */}
-        <div className="order-2 lg:order-1">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        {/* Left: Text Content */}
+        <div className="order-2 lg:order-1 text-left">
           <motion.p
             variants={fadeUp}
             initial="hidden"
             animate="visible"
             custom={0}
-            className="section-label mb-4"
+            className="section-label mb-3 sm:mb-4"
           >
             Software Engineer
           </motion.p>
@@ -50,7 +50,7 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             custom={1}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.08] tracking-tight"
           >
             Faran{" "}
             <span className="gradient-text">Ahmad</span>
@@ -61,7 +61,7 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             custom={2}
-            className="mt-4 font-mono text-sm text-zinc-400"
+            className="mt-3 sm:mt-4 font-mono text-xs sm:text-sm text-zinc-400"
           >
             Frontend & DevOps
           </motion.p>
@@ -71,7 +71,7 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             custom={3}
-            className="mt-6 text-zinc-400 leading-relaxed max-w-lg"
+            className="mt-4 sm:mt-6 text-zinc-400 text-sm sm:text-base leading-relaxed max-w-lg"
           >
             Frontend-focused Software Engineer with hands-on experience
             building responsive React and Angular SPAs, cross-platform
@@ -79,35 +79,38 @@ export default function Hero() {
             about turning complex requirements into clean, scalable code.
           </motion.p>
 
-          {/* Buttons */}
+          {/* Action Buttons */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             animate="visible"
             custom={4}
-            className="mt-8 flex flex-wrap gap-4"
+            className="mt-7 sm:mt-8 flex flex-wrap gap-3 sm:gap-4"
           >
-            <a href="#work" className="glow-btn glow-btn-primary">
+            <a
+              href="#work"
+              className="glow-btn glow-btn-primary min-h-[44px] flex items-center justify-center text-xs sm:text-sm"
+            >
               View Projects
             </a>
             <a
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="glow-btn glow-btn-outline"
+              className="glow-btn glow-btn-outline min-h-[44px] flex items-center justify-center text-xs sm:text-sm gap-2"
             >
               <FileText size={16} />
               Resume
             </a>
           </motion.div>
 
-          {/* Social icons */}
+          {/* Social Icons */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             animate="visible"
             custom={5}
-            className="mt-8 flex gap-4"
+            className="mt-7 sm:mt-8 flex gap-3 sm:gap-4"
           >
             {[
               { icon: Github, href: socialLinks.github, label: "GitHub" },
@@ -120,7 +123,7 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="p-3 rounded-xl border border-white/5 bg-white/[0.02] hover:border-[#00e0ff]/30 hover:text-[#00e0ff] text-zinc-500 transition-all duration-300 hover:-translate-y-1"
+                className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl border border-white/5 bg-white/[0.02] hover:border-[#00e0ff]/30 hover:text-[#00e0ff] text-zinc-500 transition-all duration-300 hover:-translate-y-0.5 active:scale-95"
               >
                 <Icon size={18} />
               </a>
@@ -128,13 +131,13 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Right: Animated phone mockup */}
+        {/* Right: Phone mockup centered and responsive */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           custom={2}
-          className="order-1 lg:order-2"
+          className="order-1 lg:order-2 flex justify-center w-full max-w-full"
         >
           <PhoneMockup />
         </motion.div>
@@ -144,7 +147,7 @@ export default function Hero() {
       <motion.div
         animate={shouldReduce ? {} : { y: [0, 8, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-600"
+        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-600 pointer-events-none"
       >
         <span className="font-mono text-[10px]">scroll</span>
         <ChevronDown size={16} />

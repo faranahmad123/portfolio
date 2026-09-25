@@ -39,7 +39,7 @@ export default function PortfolioClient() {
 
       {/* Main site */}
       <Navbar />
-      <main>
+      <main className="w-full max-w-full overflow-x-hidden">
         <Hero />
         <About />
         <SkillInspector />

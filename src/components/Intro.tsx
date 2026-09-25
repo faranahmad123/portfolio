@@ -64,7 +64,7 @@ export default function Intro({ onComplete }: IntroProps) {
     <AnimatePresence>
       {visible && (
         <motion.div
-          className="fixed inset-0 z-[10000] flex items-center justify-center bg-[#07080c]"
+          className="fixed inset-0 z-[10000] flex items-center justify-center bg-[#07080c] overflow-hidden"
           initial={{ opacity: 1 }}
           exit={{ y: "-100%", opacity: 0 }}
           transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
@@ -72,32 +72,32 @@ export default function Intro({ onComplete }: IntroProps) {
           role="dialog"
           aria-label="Loading intro"
         >
-          {/* Skip button */}
+          {/* Skip button (min 44px tap target) */}
           <button
             onClick={(e) => {
               e.stopPropagation();
               skip();
             }}
-            className="absolute top-6 right-6 z-10 font-mono text-xs text-zinc-500 hover:text-[#00e0ff] transition-colors border border-zinc-800 hover:border-[#00e0ff]/30 rounded-lg px-4 py-2"
+            className="absolute top-4 sm:top-6 right-4 sm:right-6 z-10 font-mono text-xs text-zinc-400 hover:text-[#00e0ff] transition-colors border border-zinc-800 hover:border-[#00e0ff]/30 rounded-lg px-4 py-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center bg-black/40"
             aria-label="Skip intro"
           >
             SKIP →
           </button>
 
-          <div className="flex flex-col items-center gap-8 px-6 max-w-md w-full">
+          <div className="flex flex-col items-center gap-6 sm:gap-8 px-4 sm:px-6 max-w-md w-full">
             {/* Status bar */}
-            <div className="w-full flex items-center justify-between font-mono text-[11px] text-zinc-600">
+            <div className="w-full flex items-center justify-between font-mono text-[10px] sm:text-[11px] text-zinc-500">
               <span>9:41</span>
               <div className="flex gap-1">
-                <div className="w-4 h-2 rounded-sm bg-zinc-700" />
-                <div className="w-4 h-2 rounded-sm bg-zinc-700" />
-                <div className="w-4 h-2 rounded-sm bg-zinc-800" />
+                <div className="w-3.5 sm:w-4 h-2 rounded-xs bg-zinc-700" />
+                <div className="w-3.5 sm:w-4 h-2 rounded-xs bg-zinc-700" />
+                <div className="w-3.5 sm:w-4 h-2 rounded-xs bg-zinc-800" />
               </div>
             </div>
 
-            {/* Name reveal */}
-            <div className="text-center">
-              <h1 className="text-4xl md:text-5xl font-bold text-white font-[family-name:var(--font-display)] tracking-tight">
+            {/* Name reveal with responsive font sizes */}
+            <div className="text-center w-full">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white font-[family-name:var(--font-display)] tracking-tight">
                 {nameRevealed}
                 <motion.span
                   animate={{ opacity: [1, 0] }}
@@ -116,7 +116,7 @@ export default function Intro({ onComplete }: IntroProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
-                  className="mt-4 font-mono text-sm text-zinc-500"
+                  className="mt-3 sm:mt-4 font-mono text-xs sm:text-sm text-zinc-400"
                 >
                   {roles[roleIndex]}
                 </motion.p>
@@ -135,25 +135,9 @@ export default function Intro({ onComplete }: IntroProps) {
                   transition={{ ease: "linear" }}
                 />
               </div>
-              <p className="text-right font-mono text-[10px] text-zinc-700 mt-1">
+              <p className="text-right font-mono text-[10px] text-zinc-600 mt-1">
                 {progress}%
               </p>
-            </div>
-
-            {/* Role chips */}
-            <div className="flex gap-3 flex-wrap justify-center">
-              {roles.map((role, i) => (
-                <span
-                  key={role}
-                  className={`font-mono text-[10px] px-3 py-1 rounded-full border transition-all duration-300 ${
-                    i === roleIndex
-                      ? "border-[#00e0ff]/40 text-[#00e0ff] bg-[#00e0ff]/5"
-                      : "border-zinc-800 text-zinc-600"
-                  }`}
-                >
-                  {role}
-                </span>
-              ))}
             </div>
           </div>
         </motion.div>
