@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="border-t border-white/5 py-8 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left w-full">
         <p className="font-mono text-xs text-zinc-500">
-          © 2026 Faran Ahmad. Engineered with Next.js & TypeScript.
+          © 2026 Faran Ahmad
         </p>
 
         <div className="flex gap-2 sm:gap-4">

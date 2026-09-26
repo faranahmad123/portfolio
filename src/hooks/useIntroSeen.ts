@@ -1,33 +1,57 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+
+const STORAGE_KEY = "portfolio_intro_seen";
 
 /**
- * Returns true once the cinematic intro should be skipped
- * (already shown this session). Wraps sessionStorage in try/catch
- * for SSR safety and privacy-mode browsers.
+ * Hook to manage whether the full-screen intro sequence should play.
+ * - Tracks session state via sessionStorage (key: "portfolio_intro_seen").
+ * - Wraps all storage access in try/catch to safely handle strict privacy modes.
+ * - Respects prefers-reduced-motion: skips straight to hero if user prefers reduced motion.
+ * - Resolves on mount (useEffect) to prevent hydration mismatches between SSR and client.
  */
 export function useIntroSeen() {
-  const [seen, setSeen] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+  const [shouldShowIntro, setShouldShowIntro] = useState(false);
 
   useEffect(() => {
     try {
-      if (sessionStorage.getItem("intro_seen") === "1") {
-        setSeen(true);
+      // 1. Accessibility: Check prefers-reduced-motion
+      const prefersReducedMotion =
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // 2. Session check: Has intro played in this session?
+      const seen = sessionStorage.getItem(STORAGE_KEY) === "true";
+
+      if (seen || prefersReducedMotion) {
+        setShouldShowIntro(false);
+      } else {
+        setShouldShowIntro(true);
       }
     } catch {
-      // sessionStorage unavailable — show intro anyway
+      // Safe fallback: if sessionStorage is disabled/blocked in privacy mode, show intro
+      setShouldShowIntro(true);
+    } finally {
+      setIsReady(true);
     }
   }, []);
 
-  const markSeen = () => {
-    setSeen(true);
+  const markSeen = useCallback(() => {
+    setShouldShowIntro(false);
     try {
-      sessionStorage.setItem("intro_seen", "1");
+      sessionStorage.setItem(STORAGE_KEY, "true");
     } catch {
-      // noop
+      // Safe fallback: ignore write failure in restricted environments
     }
-  };
+  }, []);
 
-  return { seen, markSeen };
+  return {
+    isReady,
+    shouldShowIntro,
+    markSeen,
+    // Backwards-compatibility alias
+    seen: !shouldShowIntro,
+  };
 }

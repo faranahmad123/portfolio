@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
 import { useIntroSeen } from "@/hooks/useIntroSeen";
 import Intro from "@/components/Intro";
 import Navbar from "@/components/Navbar";
@@ -16,28 +16,21 @@ import Footer from "@/components/Footer";
 import CursorGlow from "@/components/CursorGlow";
 
 export default function PortfolioClient() {
-  const { seen, markSeen } = useIntroSeen();
-  const [introComplete, setIntroComplete] = useState(false);
-
-  // If already seen, skip intro immediately
-  useEffect(() => {
-    if (seen) setIntroComplete(true);
-  }, [seen]);
-
-  const handleIntroComplete = () => {
-    markSeen();
-    setIntroComplete(true);
-  };
+  const { isReady, shouldShowIntro, markSeen } = useIntroSeen();
 
   return (
     <>
-      {/* Cinematic intro — shown once per session */}
-      {!introComplete && <Intro onComplete={handleIntroComplete} />}
+      {/* Full-screen loading intro: rendered conditionally based on mount session check, unmounts cleanly with slide-up curtain via AnimatePresence */}
+      <AnimatePresence mode="wait">
+        {isReady && shouldShowIntro && (
+          <Intro key="portfolio-intro" onComplete={markSeen} />
+        )}
+      </AnimatePresence>
 
       {/* Cursor glow — desktop only */}
       <CursorGlow />
 
-      {/* Main site */}
+      {/* Main site content rendered underneath intro overlay */}
       <Navbar />
       <main className="w-full max-w-full overflow-x-hidden">
         <Hero />
