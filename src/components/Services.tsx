@@ -16,7 +16,7 @@ export default function Services() {
         <SectionHeading
           number="03"
           label="Offerings"
-          subtitle="What I do."
+          subtitle="What we do."
         />
 
         <div className="mt-12 sm:mt-16 space-y-3.5 sm:space-y-4">

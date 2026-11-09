@@ -24,12 +24,14 @@ function ProjectImageFallback({ title }: { title: string }) {
 }
 
 export default function Projects() {
+  const visibleProjects = projects.filter((p) => p.published !== false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [imgErrors, setImgErrors] = useState<Record<string, boolean>>({});
   const shouldReduce = useReducedMotion();
   const carouselRef = useRef<HTMLDivElement>(null);
 
-  const activeProject = projects[activeIndex];
+  const activeProject = visibleProjects[activeIndex] || visibleProjects[0];
+
   const isFallback = (id: string, imgPath?: string) => {
     return (
       !imgPath ||
@@ -61,7 +63,7 @@ export default function Projects() {
         <div className="hidden md:grid md:grid-cols-[1fr_1fr] gap-8 mt-16 items-start">
           {/* Left: scrollable project list */}
           <div className="space-y-4">
-            {projects.map((project, i) => (
+            {visibleProjects.map((project, i) => (
               <motion.button
                 key={project.id}
                 initial={{ opacity: 0, x: shouldReduce ? 0 : -20 }}
@@ -78,7 +80,7 @@ export default function Projects() {
               >
                 <div className="flex items-start gap-4">
                   <span className="font-mono text-2xl font-bold text-white/10 shrink-0">
-                    {project.number}
+                    {String(i + 1).padStart(2, "0")}
                   </span>
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-wrap gap-1.5 mb-2">
@@ -107,107 +109,111 @@ export default function Projects() {
           {/* Right: sticky preview panel (Desktop only) */}
           <div className="sticky top-24 h-fit">
             <AnimatePresence mode="wait">
-              <motion.div
-                key={activeProject.id}
-                initial={{ opacity: 0, scale: shouldReduce ? 1 : 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.35 }}
-                className="glass-card overflow-hidden"
-              >
-                {/* 16:9 Aspect Video Container using next/image with fill */}
-                <div className="relative aspect-video w-full overflow-hidden bg-[#0c0e17] border-b border-white/5">
-                  {!isFallback(activeProject.id, activeProject.image) ? (
-                    <Image
-                      src={activeProject.image}
-                      alt={activeProject.title}
-                      fill
-                      sizes="(max-width: 1024px) 50vw, 600px"
-                      className="object-cover"
-                      onError={() =>
-                        setImgErrors((prev) => ({ ...prev, [activeProject.id]: true }))
-                      }
-                    />
-                  ) : (
-                    <ProjectImageFallback title={activeProject.title} />
-                  )}
-                </div>
-
-                <div className="p-6">
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {activeProject.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="font-mono text-[10px] px-2.5 py-1 rounded-full border border-[#00e0ff]/15 text-[#00e0ff]/70 bg-[#00e0ff]/5"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+              {activeProject && (
+                <motion.div
+                  key={activeProject.id}
+                  initial={{ opacity: 0, scale: shouldReduce ? 1 : 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.35 }}
+                  className="glass-card overflow-hidden"
+                >
+                  {/* 16:9 Aspect Video Container using next/image with fill */}
+                  <div className="relative aspect-video w-full overflow-hidden bg-[#0c0e17] border-b border-white/5">
+                    {!isFallback(activeProject.id, activeProject.image) ? (
+                      <Image
+                        src={activeProject.image}
+                        alt={activeProject.title}
+                        fill
+                        sizes="(max-width: 1024px) 50vw, 600px"
+                        className="object-cover"
+                        onError={() =>
+                          setImgErrors((prev) => ({ ...prev, [activeProject.id]: true }))
+                        }
+                      />
+                    ) : (
+                      <ProjectImageFallback title={activeProject.title} />
+                    )}
                   </div>
-                  <h3 className="text-white font-bold text-xl leading-tight">
-                    {activeProject.title}
-                  </h3>
-                  <p className="text-zinc-400 text-sm mt-2.5 leading-relaxed">
-                    {activeProject.description}
-                  </p>
 
-                  {/* Bullet Highlights */}
-                  {activeProject.bullets && activeProject.bullets.length > 0 && (
-                    <div className="mt-4 space-y-2 border-t border-white/5 pt-3">
-                      <p className="font-mono text-[10px] text-zinc-500 uppercase tracking-wider">
-                        Key Highlights
-                      </p>
-                      <ul className="space-y-1.5">
-                        {activeProject.bullets.slice(0, 3).map((bullet, idx) => (
-                          <li
-                            key={idx}
-                            className="flex items-start gap-2 text-xs text-zinc-400 leading-relaxed"
-                          >
-                            <span className="text-[#00e0ff] text-[10px] mt-0.5 shrink-0">
-                              ✦
-                            </span>
-                            <span>{bullet}</span>
-                          </li>
-                        ))}
-                      </ul>
+                  <div className="p-6">
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {activeProject.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="font-mono text-[10px] px-2.5 py-1 rounded-full border border-[#00e0ff]/15 text-[#00e0ff]/70 bg-[#00e0ff]/5"
+                        >
+                          {tag}
+                        </span>
+                      ))}
                     </div>
-                  )}
+                    <h3 className="text-white font-bold text-xl leading-tight">
+                      {activeProject.title}
+                    </h3>
+                    <p className="text-zinc-400 text-sm mt-2.5 leading-relaxed">
+                      {activeProject.description}
+                    </p>
 
-                  {/* Tech stack */}
-                  <div className="flex flex-wrap gap-1.5 mt-4">
-                    {activeProject.techStack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="font-mono text-[9px] px-2 py-1 rounded-md border border-white/5 text-zinc-500 bg-white/[0.02]"
+                    {/* Bullet Highlights */}
+                    {activeProject.bullets && activeProject.bullets.length > 0 && (
+                      <div className="mt-4 space-y-2 border-t border-white/5 pt-3">
+                        <p className="font-mono text-[10px] text-zinc-500 uppercase tracking-wider">
+                          Key Highlights
+                        </p>
+                        <ul className="space-y-1.5">
+                          {activeProject.bullets.slice(0, 4).map((bullet, idx) => (
+                            <li
+                              key={idx}
+                              className="flex items-start gap-2 text-xs text-zinc-400 leading-relaxed"
+                            >
+                              <span className="text-[#00e0ff] text-[10px] mt-0.5 shrink-0">
+                                ✦
+                              </span>
+                              <span>{bullet}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Tech stack */}
+                    <div className="flex flex-wrap gap-1.5 mt-4">
+                      {activeProject.techStack.map((tech) => (
+                        <span
+                          key={tech}
+                          className="font-mono text-[9px] px-2 py-1 rounded-md border border-white/5 text-zinc-500 bg-white/[0.02]"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Links */}
+                    <div className="flex gap-3 mt-6">
+                      <a
+                        href={activeProject.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="glow-btn glow-btn-primary text-xs inline-flex items-center gap-2 min-h-[44px]"
                       >
-                        {tech}
-                      </span>
-                    ))}
+                        <ExternalLink size={14} />
+                        Live Demo
+                      </a>
+                      {activeProject.githubUrl && activeProject.githubUrl !== "#" && (
+                        <a
+                          href={activeProject.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="glow-btn glow-btn-outline text-xs inline-flex items-center gap-2 min-h-[44px]"
+                        >
+                          <Github size={14} />
+                          GitHub
+                        </a>
+                      )}
+                    </div>
                   </div>
-
-                  {/* Links */}
-                  <div className="flex gap-3 mt-6">
-                    <a
-                      href={activeProject.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="glow-btn glow-btn-primary text-xs inline-flex items-center gap-2 min-h-[44px]"
-                    >
-                      <ExternalLink size={14} />
-                      Live Demo
-                    </a>
-                    <a
-                      href={activeProject.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="glow-btn glow-btn-outline text-xs inline-flex items-center gap-2 min-h-[44px]"
-                    >
-                      <Github size={14} />
-                      GitHub
-                    </a>
-                  </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              )}
             </AnimatePresence>
           </div>
         </div>
@@ -217,7 +223,7 @@ export default function Projects() {
           {/* Mobile carousel navigation arrows */}
           <div className="flex items-center justify-between gap-3 mb-4">
             <span className="font-mono text-xs text-zinc-500">
-              Swipe to explore ({projects.length} projects)
+              Swipe to explore ({visibleProjects.length} projects)
             </span>
             <div className="flex gap-2">
               <button
@@ -246,7 +252,7 @@ export default function Projects() {
               WebkitOverflowScrolling: "touch",
             }}
           >
-            {projects.map((project) => {
+            {visibleProjects.map((project, i) => {
               const fallbackNeeded = isFallback(project.id, project.image);
 
               return (
@@ -258,7 +264,7 @@ export default function Projects() {
                   transition={{ duration: 0.4 }}
                   className="glass-card w-[86vw] max-w-[340px] snap-center overflow-hidden shrink-0 flex flex-col p-4 sm:p-5 border border-white/10"
                 >
-                  {/* Fixed 16:9 Image container with 16px+ padding from card edge */}
+                  {/* Fixed 16:9 Image container */}
                   <div className="relative aspect-video w-full rounded-xl overflow-hidden bg-[#0c0e17] border border-white/5 mb-4 shrink-0">
                     {!fallbackNeeded ? (
                       <Image
@@ -279,15 +285,20 @@ export default function Projects() {
                   {/* Card Content with proper internal spacing */}
                   <div className="flex-1 flex flex-col justify-between">
                     <div>
-                      <div className="flex flex-wrap gap-1.5 mb-2">
-                        {project.tags.slice(0, 3).map((tag) => (
-                          <span
-                            key={tag}
-                            className="font-mono text-[9px] px-2 py-0.5 rounded-full border border-[#00e0ff]/15 text-[#00e0ff]/80 bg-[#00e0ff]/5"
-                          >
-                            {tag}
-                          </span>
-                        ))}
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <div className="flex flex-wrap gap-1.5">
+                          {project.tags.slice(0, 3).map((tag) => (
+                            <span
+                              key={tag}
+                              className="font-mono text-[9px] px-2 py-0.5 rounded-full border border-[#00e0ff]/15 text-[#00e0ff]/80 bg-[#00e0ff]/5"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <span className="font-mono text-xs text-zinc-600 font-bold">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
                       </div>
 
                       <h3 className="text-white font-bold text-base sm:text-lg leading-snug line-clamp-2">
@@ -299,7 +310,7 @@ export default function Projects() {
                       </p>
                     </div>
 
-                    {/* Action buttons (min 44px tap targets for mobile accessibility) */}
+                    {/* Action buttons */}
                     <div className="flex gap-2.5 mt-5 pt-3 border-t border-white/5">
                       <a
                         href={project.liveUrl}
@@ -310,15 +321,17 @@ export default function Projects() {
                         <ExternalLink size={14} />
                         Demo
                       </a>
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="glow-btn glow-btn-outline text-xs !py-2.5 flex-1 inline-flex items-center justify-center gap-1.5 min-h-[44px]"
-                      >
-                        <Github size={14} />
-                        Code
-                      </a>
+                      {project.githubUrl && project.githubUrl !== "#" ? (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="glow-btn glow-btn-outline text-xs !py-2.5 flex-1 inline-flex items-center justify-center gap-1.5 min-h-[44px]"
+                        >
+                          <Github size={14} />
+                          Code
+                        </a>
+                      ) : null}
                     </div>
                   </div>
                 </motion.div>

@@ -1,5 +1,5 @@
 // ============================================================
-// 🛠️ SKILLS / TECH STACK — Edit to update your expertise.
+// 🛠️ SKILLS / TECH STACK — Agency Expertise
 // ============================================================
 
 export interface Skill {
@@ -59,6 +59,20 @@ export const skills: Skill[] = [
     description: "Google's UI toolkit for crafting natively compiled apps for mobile, web, and desktop from a single codebase.",
     proficiency: "High",
     icon: "📱",
+  },
+  {
+    name: "Automation Workflows",
+    category: "Automation",
+    description: "Design and deployment of custom automated business workflows that eliminate repetitive busywork and sync tools.",
+    proficiency: "Medium",
+    icon: "⚙️",
+  },
+  {
+    name: "API Integrations",
+    category: "Integration",
+    description: "Robust connection of third-party platforms, webhooks, CRM endpoints, and payment gateways into unified data flows.",
+    proficiency: "Medium",
+    icon: "🔌",
   },
   {
     name: "TensorFlow/Keras",
@@ -126,11 +140,11 @@ export const skills: Skill[] = [
 ];
 
 export const concepts = [
-  "RESTful API Integration",
-  "Siamese Neural Networks",
-  "NLP & Word2Vec",
-  "Containerization",
+  "Business Process Automation",
+  "API Integrations & Webhooks",
+  "Cross-Platform Mobile",
+  "Full-Stack Web Engineering",
   "State Management",
-  "Real-time Sync",
-  "OCR & Computer Vision",
+  "Real-time Cloud Sync",
+  "Containerization & CI/CD",
 ];

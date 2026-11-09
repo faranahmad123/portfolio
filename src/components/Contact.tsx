@@ -2,8 +2,8 @@
 
 import { useState, FormEvent } from "react";
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
-import { Send, Mail, Phone, Linkedin, Github, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
-import { socialLinks } from "@/data/navigation";
+import { Send, Mail, MessageCircle, Instagram, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { siteConfig } from "@/data/site";
 import SectionHeading from "./SectionHeading";
 
 export default function Contact() {
@@ -46,7 +46,7 @@ export default function Contact() {
       }
 
       setStatus("success");
-      setFeedback("Message dispatched successfully! I will get back to you shortly.");
+      setFeedback("Message dispatched successfully! We will get back to you within 24 hours.");
       setName("");
       setProjectType("");
       setContact("");
@@ -55,7 +55,7 @@ export default function Contact() {
       setFeedback(
         err instanceof Error
           ? err.message
-          : "Something went wrong. Please try again or reach out directly via email."
+          : "Something went wrong. Please try again or reach out directly via WhatsApp or email."
       );
     }
   };
@@ -64,26 +64,20 @@ export default function Contact() {
     {
       icon: Mail,
       label: "Email",
-      value: socialLinks.email,
-      href: `mailto:${socialLinks.email}`,
+      value: siteConfig.email,
+      href: `mailto:${siteConfig.email}`,
     },
     {
-      icon: Phone,
+      icon: MessageCircle,
       label: "WhatsApp",
-      value: socialLinks.phone,
-      href: socialLinks.whatsapp,
+      value: siteConfig.whatsappNumber,
+      href: siteConfig.whatsappLink,
     },
     {
-      icon: Linkedin,
-      label: "LinkedIn",
-      value: "faran02",
-      href: socialLinks.linkedin,
-    },
-    {
-      icon: Github,
-      label: "GitHub",
-      value: "faranahmad123",
-      href: socialLinks.github,
+      icon: Instagram,
+      label: "Instagram",
+      value: siteConfig.instagramHandle,
+      href: siteConfig.instagramUrl,
     },
   ];
 
@@ -91,7 +85,7 @@ export default function Contact() {
     <section id="contact" className="py-24 md:py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
         <SectionHeading
-          number="07"
+          number="05"
           label="Initiate Connect"
           subtitle="Let's talk."
         />
@@ -103,8 +97,9 @@ export default function Contact() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mt-6 text-zinc-400 text-sm sm:text-base max-w-lg leading-relaxed"
         >
-          Open to freelance projects, internship opportunities, and full-time
-          roles. Let&apos;s build something great together.
+          Ready to launch your website, app, automation or grow your social
+          media? Tell us what you need and we&apos;ll get back to you within 24
+          hours.
         </motion.p>
 
         <div className="mt-12 sm:mt-16 grid lg:grid-cols-2 gap-8">
@@ -137,7 +132,7 @@ export default function Contact() {
               />
 
               <div className="text-zinc-300 leading-loose text-sm sm:text-base">
-                <span>Hi Faran, my name is </span>
+                <span>Hi DevNest, my name is </span>
                 <input
                   type="text"
                   value={name}
@@ -147,17 +142,17 @@ export default function Contact() {
                   className="w-full min-[440px]:w-auto min-[440px]:inline-block min-[440px]:w-36 sm:w-40 bg-transparent border-b border-[#00e0ff]/30 text-[#00e0ff] font-mono text-sm px-1 py-1 focus:outline-none focus:border-[#00e0ff] placeholder:text-zinc-700 transition-colors my-1"
                   aria-label="Your name"
                 />
-                <span> and I am looking for a developer for </span>
+                <span> and I need </span>
                 <input
                   type="text"
                   value={projectType}
                   onChange={(e) => setProjectType(e.target.value)}
-                  placeholder="project type"
+                  placeholder="website, app, automation, social media..."
                   required
-                  className="w-full min-[440px]:w-auto min-[440px]:inline-block min-[440px]:w-36 sm:w-40 bg-transparent border-b border-[#00e0ff]/30 text-[#00e0ff] font-mono text-sm px-1 py-1 focus:outline-none focus:border-[#00e0ff] placeholder:text-zinc-700 transition-colors my-1"
-                  aria-label="Project type"
+                  className="w-full min-[440px]:w-auto min-[440px]:inline-block min-[440px]:w-64 sm:w-72 bg-transparent border-b border-[#00e0ff]/30 text-[#00e0ff] font-mono text-sm px-1 py-1 focus:outline-none focus:border-[#00e0ff] placeholder:text-zinc-700 transition-colors my-1"
+                  aria-label="Service or project type"
                 />
-                <span>. You can reach me at </span>
+                <span> for my business. You can reach me at </span>
                 <input
                   type="text"
                   value={contact}
@@ -165,7 +160,7 @@ export default function Contact() {
                   placeholder="email or phone"
                   required
                   className="w-full min-[440px]:w-auto min-[440px]:inline-block min-[440px]:w-44 sm:w-48 bg-transparent border-b border-[#00e0ff]/30 text-[#00e0ff] font-mono text-sm px-1 py-1 focus:outline-none focus:border-[#00e0ff] placeholder:text-zinc-700 transition-colors my-1"
-                  aria-label="Your contact"
+                  aria-label="Your contact info"
                 />
                 <span> to discuss this further.</span>
               </div>
@@ -191,13 +186,23 @@ export default function Contact() {
                   )}
                 </button>
 
+                <a
+                  href={siteConfig.whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="glow-btn glow-btn-outline w-full sm:w-auto inline-flex items-center justify-center gap-2 min-h-[44px] text-xs sm:text-sm"
+                >
+                  <MessageCircle size={16} className="text-emerald-400" />
+                  Chat on WhatsApp
+                </a>
+
                 {status === "error" && (
                   <button
                     type="button"
                     onClick={() => {
-                      const body = `Hi Faran, my name is ${name || "[Name]"} and I am looking for a developer for ${projectType || "[Project]"}. You can reach me at ${contact || "[Contact]"} to discuss this further.`;
+                      const body = `Hi DevNest, my name is ${name || "[Name]"} and I need ${projectType || "[service / project type]"} for my business. You can reach me at ${contact || "[Contact]"} to discuss this further.`;
                       window.open(
-                        `mailto:${socialLinks.email}?subject=New Inquiry from ${name || "Someone"}&body=${encodeURIComponent(body)}`,
+                        `mailto:${siteConfig.email}?subject=New DevNest Inquiry from ${name || "Someone"}&body=${encodeURIComponent(body)}`,
                         "_self"
                       );
                     }}

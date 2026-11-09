@@ -9,8 +9,7 @@ import About from "@/components/About";
 import SkillInspector from "@/components/SkillInspector";
 import Services from "@/components/Services";
 import Projects from "@/components/Projects";
-import Experience from "@/components/Experience";
-import Certs from "@/components/Certs";
+import HowWeWork from "@/components/HowWeWork";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import CursorGlow from "@/components/CursorGlow";
@@ -23,7 +22,7 @@ export default function PortfolioClient() {
       {/* Full-screen loading intro: rendered conditionally based on mount session check, unmounts cleanly with slide-up curtain via AnimatePresence */}
       <AnimatePresence mode="wait">
         {isReady && shouldShowIntro && (
-          <Intro key="portfolio-intro" onComplete={markSeen} />
+          <Intro key="devnest-intro" onComplete={markSeen} />
         )}
       </AnimatePresence>
 
@@ -38,8 +37,7 @@ export default function PortfolioClient() {
         <SkillInspector />
         <Services />
         <Projects />
-        <Experience />
-        <Certs />
+        <HowWeWork />
         <Contact />
       </main>
       <Footer />

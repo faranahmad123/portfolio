@@ -1,21 +1,33 @@
 "use client";
 
-import { socialLinks } from "@/data/navigation";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { siteConfig } from "@/data/site";
+import { Instagram, MessageCircle, Mail } from "lucide-react";
 
 export default function Footer() {
   return (
     <footer className="border-t border-white/5 py-8 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left w-full">
         <p className="font-mono text-xs text-zinc-500">
-          © 2026 Faran Ahmad
+          © 2026 {siteConfig.brandName}. All rights reserved.
         </p>
 
         <div className="flex gap-2 sm:gap-4">
           {[
-            { icon: Github, href: socialLinks.github, label: "GitHub" },
-            { icon: Linkedin, href: socialLinks.linkedin, label: "LinkedIn" },
-            { icon: Mail, href: `mailto:${socialLinks.email}`, label: "Email" },
+            {
+              icon: Instagram,
+              href: siteConfig.instagramUrl,
+              label: `Instagram (${siteConfig.instagramHandle})`,
+            },
+            {
+              icon: MessageCircle,
+              href: siteConfig.whatsappLink,
+              label: "WhatsApp",
+            },
+            {
+              icon: Mail,
+              href: `mailto:${siteConfig.email}`,
+              label: "Email",
+            },
           ].map(({ icon: Icon, href, label }) => (
             <a
               key={label}

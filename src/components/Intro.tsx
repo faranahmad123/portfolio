@@ -2,18 +2,20 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { siteConfig } from "@/data/site";
 
 interface IntroProps {
   onComplete: () => void;
 }
 
 const ROLES = [
-  "Frontend Developer",
-  "DevOps Engineer",
-  "Flutter Developer",
+  "Websites",
+  "Mobile Apps",
+  "Automation",
+  "Social Media",
 ];
 
-const NAME = "Faran Ahmad";
+const NAME = siteConfig.brandName;
 const NAME_LETTERS = Array.from(NAME);
 
 export default function Intro({ onComplete }: IntroProps) {
@@ -115,7 +117,7 @@ export default function Intro({ onComplete }: IntroProps) {
       }}
       onClick={handleSkip}
       role="dialog"
-      aria-label="Portfolio introductory loading sequence"
+      aria-label="DevNest introductory loading sequence"
     >
       {/* Background ambient glow behind center name */}
       <div

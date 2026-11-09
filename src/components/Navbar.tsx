@@ -39,7 +39,7 @@ export default function Navbar() {
             className="font-mono text-sm text-white hover:text-[#00e0ff] transition-colors py-2"
             aria-label="Back to top"
           >
-            faran<span className="text-[#00e0ff]">/</span>ahmad
+            dev<span className="text-[#00e0ff]">/</span>nest
           </a>
 
           {/* Desktop links */}
@@ -58,7 +58,7 @@ export default function Navbar() {
               href="#contact"
               className="glow-btn glow-btn-primary text-xs !py-2 !px-4"
             >
-              Hire Me
+              Get a Quote
             </a>
           </div>
 
@@ -121,7 +121,7 @@ export default function Navbar() {
                 transition={{ delay: 0.4, duration: 0.3 }}
                 className="glow-btn glow-btn-primary mt-4 w-full flex items-center justify-center min-h-[44px]"
               >
-                Hire Me
+                Get a Quote
               </motion.a>
             </nav>
           </motion.div>

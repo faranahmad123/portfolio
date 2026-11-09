@@ -4,27 +4,28 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { PROFILE_IMAGE } from "@/lib/assets";
+import { siteConfig } from "@/data/site";
 
 const CYCLE_MS = 3500;
 
 const taglines = [
-  "Turning requirements into scalable code.",
-  "Bridging design and deployment.",
-  "Clean code. Real-world impact.",
+  "Build. Automate. Grow.",
+  "Websites, apps and smart business workflows.",
+  "Digital systems built to scale.",
 ];
 
-const stackTags = [
-  { label: "Frontend", desc: "React • Angular", color: "text-[#00e0ff]", border: "border-[#00e0ff]/30 bg-black/60" },
-  { label: "DevOps", desc: "Docker • CI/CD", color: "text-[#8b5cf6]", border: "border-[#8b5cf6]/30 bg-black/60" },
-  { label: "Mobile", desc: "Flutter • Dart", color: "text-emerald-400", border: "border-emerald-400/30 bg-black/60" },
-  { label: "AI / ML", desc: "Python • OpenCV", color: "text-amber-400", border: "border-amber-400/30 bg-black/60" },
+const serviceChips = [
+  { label: "Websites", desc: "Next.js • React • Tailwind", color: "text-[#00e0ff]", border: "border-[#00e0ff]/30 bg-black/60" },
+  { label: "Mobile Apps", desc: "Flutter • iOS • Android", color: "text-[#8b5cf6]", border: "border-[#8b5cf6]/30 bg-black/60" },
+  { label: "Automation", desc: "Python • APIs • Workflows", color: "text-emerald-400", border: "border-emerald-400/30 bg-black/60" },
+  { label: "Social Media", desc: "Content • Growth • Ads", color: "text-amber-400", border: "border-amber-400/30 bg-black/60" },
 ];
 
 const floatingChips = [
-  { label: "React", top: "10%", left: "-14%", right: "auto", delay: 0 },
-  { label: "Angular", top: "32%", left: "auto", right: "-16%", delay: 0.5 },
-  { label: "Flutter", top: "58%", left: "-12%", right: "auto", delay: 1 },
-  { label: "Docker", top: "80%", left: "auto", right: "-14%", delay: 1.5 },
+  { label: "Websites", top: "10%", left: "-14%", right: "auto", delay: 0 },
+  { label: "Mobile Apps", top: "32%", left: "auto", right: "-16%", delay: 0.5 },
+  { label: "Automation", top: "58%", left: "-12%", right: "auto", delay: 1 },
+  { label: "Social Media", top: "80%", left: "auto", right: "-14%", delay: 1.5 },
 ];
 
 export default function PhoneMockup() {
@@ -89,7 +90,7 @@ export default function PhoneMockup() {
         </motion.span>
       ))}
 
-      {/* Realistic Phone Frame: scales proportionally on 320px–428px mobile up to desktop */}
+      {/* Realistic Phone Frame */}
       <div className="relative w-[260px] min-[375px]:w-[280px] sm:w-[320px] md:w-[340px] h-[520px] min-[375px]:h-[560px] sm:h-[640px] md:h-[670px] max-w-[calc(100vw-3rem)] rounded-[2.5rem] sm:rounded-[3.2rem] bg-[#07080c] p-[7px] sm:p-[10px] shadow-2xl shadow-[#00e0ff]/10 border border-white/15 ring-1 ring-white/5 flex flex-col justify-between z-10 shrink-0">
         
         {/* Phone screen container (Full-bleed content with rounded inner display) */}
@@ -99,7 +100,7 @@ export default function PhoneMockup() {
           {!imgError ? (
             <Image
               src={PROFILE_IMAGE}
-              alt="Faran Ahmad"
+              alt={`${siteConfig.founderName} — Founder, ${siteConfig.brandName}`}
               fill
               priority
               sizes="(max-width: 640px) 280px, 340px"
@@ -109,7 +110,7 @@ export default function PhoneMockup() {
           ) : (
             /* Graceful fallback if image fails to load */
             <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#00e0ff]/20 via-[#8b5cf6]/20 to-[#07080c] flex items-center justify-center">
-              <span className="text-6xl sm:text-7xl font-bold gradient-text opacity-30 select-none">FA</span>
+              <span className="text-6xl sm:text-7xl font-bold gradient-text opacity-30 select-none">DN</span>
             </div>
           )}
 
@@ -146,21 +147,21 @@ export default function PhoneMockup() {
             </div>
           </div>
 
-          {/* "Available for work" pulsing-dot badge */}
+          {/* "Taking new projects" pulsing-dot badge */}
           <div className="absolute top-9 sm:top-11 right-2.5 sm:right-3.5 z-20 flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-black/60 backdrop-blur-md border border-emerald-500/30 shadow-lg">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
             </span>
             <span className="font-mono text-[8px] sm:text-[10px] font-medium text-emerald-300 tracking-wide">
-              Available for work
+              Taking new projects
             </span>
           </div>
 
           {/* Overlaid UI content directly on the photo inside bottom gradient area */}
           <div className="absolute inset-x-0 bottom-0 p-4 sm:p-6 z-20 flex flex-col justify-end min-h-[190px] sm:min-h-[220px]">
             <AnimatePresence mode="wait">
-              {/* Screen 0: Lock-screen style widget with Name & Role */}
+              {/* Screen 0: Lock-screen style widget with DevNest & Founder */}
               {activeScreen === 0 && (
                 <motion.div
                   key="screen-0"
@@ -173,23 +174,23 @@ export default function PhoneMockup() {
                 >
                   <div className="inline-flex items-center gap-1.5 font-mono text-[9px] sm:text-[10px] text-[#00e0ff] tracking-wider uppercase bg-[#00e0ff]/10 border border-[#00e0ff]/20 px-2 py-0.5 rounded-full mb-1.5 sm:mb-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#00e0ff]" />
-                    Software Engineer
+                    Digital Agency
                   </div>
                   <h2 className="text-xl min-[375px]:text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-none">
-                    Faran Ahmad
+                    DevNest
                   </h2>
                   <p className="text-xs sm:text-sm font-medium text-zinc-300 mt-1 sm:mt-1.5">
-                    Software Engineer
+                    Founded by {siteConfig.founderName}
                   </p>
                   <div className="mt-2.5 sm:mt-3 flex items-center gap-1.5 sm:gap-2 pt-2 border-t border-white/10 font-mono text-[9px] sm:text-[10px] text-zinc-400">
-                    <span>📍 Pakistan</span>
+                    <span>📍 Global</span>
                     <span className="text-zinc-600">•</span>
-                    <span className="text-[#00e0ff]">React / Flutter</span>
+                    <span className="text-[#00e0ff]">Web • Apps • Automation</span>
                   </div>
                 </motion.div>
               )}
 
-              {/* Screen 1: Core Tech Stack pill chips overlaid directly on photo */}
+              {/* Screen 1: Service chips overlaid directly on photo */}
               {activeScreen === 1 && (
                 <motion.div
                   key="screen-1"
@@ -202,27 +203,27 @@ export default function PhoneMockup() {
                 >
                   <div className="flex items-center justify-between mb-1.5 sm:mb-2">
                     <span className="font-mono text-[9px] sm:text-[10px] text-[#8b5cf6] tracking-wider uppercase bg-[#8b5cf6]/10 border border-[#8b5cf6]/20 px-2 sm:px-2.5 py-0.5 rounded-full">
-                      Core Stack
+                      Services
                     </span>
-                    <span className="font-mono text-[9px] sm:text-[10px] text-zinc-400">Production</span>
+                    <span className="font-mono text-[9px] sm:text-[10px] text-zinc-400">Full-Cycle</span>
                   </div>
                   <div className="grid grid-cols-2 gap-1.5 sm:gap-2 mt-1">
-                    {stackTags.map((tag) => (
+                    {serviceChips.map((chip) => (
                       <div
-                        key={tag.label}
-                        className={`p-1.5 sm:p-2.5 rounded-lg sm:rounded-xl border backdrop-blur-md ${tag.border}`}
+                        key={chip.label}
+                        className={`p-1.5 sm:p-2.5 rounded-lg sm:rounded-xl border backdrop-blur-md ${chip.border}`}
                       >
-                        <p className={`font-mono text-[10px] sm:text-[11px] font-semibold ${tag.color}`}>
-                          {tag.label}
+                        <p className={`font-mono text-[10px] sm:text-[11px] font-semibold ${chip.color}`}>
+                          {chip.label}
                         </p>
-                        <p className="text-[9px] sm:text-[10px] text-zinc-400 mt-0.5 truncate">{tag.desc}</p>
+                        <p className="text-[9px] sm:text-[10px] text-zinc-400 mt-0.5 truncate">{chip.desc}</p>
                       </div>
                     ))}
                   </div>
                 </motion.div>
               )}
 
-              {/* Screen 2: Philosophy / Tagline widget */}
+              {/* Screen 2: Tagline / Philosophy widget */}
               {activeScreen === 2 && (
                 <motion.div
                   key="screen-2"
@@ -234,15 +235,15 @@ export default function PhoneMockup() {
                   className="w-full text-left"
                 >
                   <span className="inline-block font-mono text-[9px] sm:text-[10px] text-emerald-400 tracking-wider uppercase bg-emerald-400/10 border border-emerald-400/20 px-2 sm:px-2.5 py-0.5 rounded-full mb-1.5 sm:mb-2">
-                    Philosophy
+                    Tagline
                   </span>
                   <div className="p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl bg-black/60 backdrop-blur-md border border-white/10">
-                    <p className="text-zinc-200 text-[11px] sm:text-[13px] leading-relaxed font-medium italic">
-                      &ldquo;{taglines[taglineIdx]}&rdquo;
+                    <p className="text-zinc-200 text-[11px] sm:text-[13px] leading-relaxed font-semibold italic">
+                      &ldquo;Build. Automate. Grow.&rdquo;
                     </p>
                     <div className="mt-2 sm:mt-2.5 pt-2 border-t border-white/10 flex items-center justify-between font-mono text-[9px] sm:text-[10px]">
-                      <span className="text-zinc-400">Faran Ahmad</span>
-                      <span className="text-[#00e0ff]">Ready to build</span>
+                      <span className="text-zinc-400">DevNest</span>
+                      <span className="text-[#00e0ff]">Founded by {siteConfig.founderName}</span>
                     </div>
                   </div>
                 </motion.div>

@@ -1,5 +1,5 @@
 // ============================================================
-// 🎯 SERVICES DATA
+// 🎯 SERVICES DATA — DevNest Offerings
 // ============================================================
 
 export interface Service {
@@ -13,54 +13,58 @@ export interface Service {
 export const services: Service[] = [
   {
     number: "01",
-    title: "Frontend Web Development",
+    title: "Website Development",
     description:
-      "Crafting pixel-perfect, performant web applications with modern frameworks and TypeScript-first architecture.",
+      "Fast, responsive, SEO-friendly websites and online stores that turn visitors into customers.",
     capabilities: [
-      "Responsive & accessible UI development",
-      "Component-driven architecture",
-      "State management & data flow patterns",
-      "Performance optimization & code splitting",
+      "Business & portfolio websites",
+      "E-commerce stores with admin panels",
+      "Landing pages",
+      "Speed & SEO optimization",
+      "Hosting and deployment (Vercel)",
     ],
-    techStack: ["React", "Angular", "TypeScript"],
+    techStack: ["Next.js", "React", "Tailwind", "Supabase"],
   },
   {
     number: "02",
-    title: "Cross-Platform Mobile Apps",
+    title: "Mobile App Development",
     description:
-      "Building beautiful, natively compiled mobile applications from a single codebase with Flutter.",
+      "Cross-platform Android and iOS apps from a single codebase, built for real users.",
     capabilities: [
-      "iOS & Android from one codebase",
-      "Custom widget development",
-      "Real-time data with Firebase",
-      "Offline-first architecture",
+      "Custom app development",
+      "UI/UX implementation",
+      "Firebase backends and authentication",
+      "Real-time features and notifications",
+      "App store deployment",
     ],
     techStack: ["Flutter", "Dart", "Firebase"],
   },
   {
     number: "03",
-    title: "API Integration & DevOps",
+    title: "Business Automation",
     description:
-      "Designing robust API integrations and containerized deployment pipelines for production-ready software.",
+      "Stop doing repetitive work by hand. We connect your tools and automate the busywork.",
     capabilities: [
-      "RESTful API design & testing",
-      "Docker containerization",
-      "CI/CD pipeline configuration",
-      "Environment consistency & automation",
+      "Workflow automation",
+      "WhatsApp / email / Google Sheets automations",
+      "Custom scripts and bots",
+      "API integrations",
+      "Data extraction and reporting",
     ],
-    techStack: ["REST", "Postman", "Docker", "Git"],
+    techStack: ["Python", "APIs", "Google Sheets", "n8n / Make / Zapier"],
   },
   {
     number: "04",
-    title: "AI & Machine Learning Solutions",
+    title: "Social Media Account Handling",
     description:
-      "Developing end-to-end machine learning systems, Siamese neural networks, and interactive model applications with production pipelines.",
+      "We run your social media so your brand stays active, consistent and growing.",
     capabilities: [
-      "Model Training & Evaluation",
-      "NLP Feature Engineering",
-      "Neural Network Architecture Design",
-      "Interactive ML Demos (Gradio)",
+      "Account setup and optimization",
+      "Content planning and posting schedule",
+      "Post and story design",
+      "Engagement and message handling",
+      "Monthly growth reports",
     ],
-    techStack: ["Python", "TensorFlow", "scikit-learn", "Gradio"],
+    techStack: ["Instagram", "Facebook", "TikTok", "LinkedIn"],
   },
 ];

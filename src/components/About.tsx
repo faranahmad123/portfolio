@@ -3,29 +3,30 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import { PROFILE_IMAGE, RESUME_PATH } from "@/lib/assets";
+import { PROFILE_IMAGE } from "@/lib/assets";
+import { siteConfig } from "@/data/site";
 import SectionHeading from "./SectionHeading";
 
-const highlights = [
+const agencyHighlights = [
   {
-    title: "Frontend",
-    items: ["React", "Angular", "TypeScript"],
-    icon: "🖥️",
+    title: "Websites",
+    items: ["Next.js", "React", "Tailwind"],
+    icon: "🌐",
   },
   {
-    title: "Cross-Platform",
-    items: ["Flutter", "Dart"],
+    title: "Mobile Apps",
+    items: ["Flutter", "Firebase"],
     icon: "📱",
   },
   {
-    title: "DevOps",
-    items: ["Docker", "Git/GitHub"],
+    title: "Automation",
+    items: ["Python", "APIs", "Workflows"],
     icon: "⚙️",
   },
   {
-    title: "Backend & AI",
-    items: ["Python", "TensorFlow", "Flask", "OpenCV"],
-    icon: "🧠",
+    title: "Social Media",
+    items: ["Content", "Scheduling", "Growth"],
+    icon: "📈",
   },
 ];
 
@@ -38,8 +39,8 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
         <SectionHeading
           number="01"
-          label="The Architect"
-          subtitle="Behind the code."
+          label="Who We Are"
+          subtitle="Behind DevNest."
         />
 
         <div className="mt-12 sm:mt-16 grid lg:grid-cols-3 gap-8 sm:gap-10">
@@ -57,7 +58,7 @@ export default function About() {
               {!imgError ? (
                 <Image
                   src={PROFILE_IMAGE}
-                  alt="Faran Ahmad"
+                  alt={`${siteConfig.founderName} — Founder, ${siteConfig.brandName}`}
                   fill
                   sizes="(max-width: 640px) 320px, 340px"
                   className="object-cover object-top transition-transform duration-700 group-hover:scale-105 select-none pointer-events-none"
@@ -66,7 +67,7 @@ export default function About() {
               ) : (
                 /* Graceful fallback if image fails to load */
                 <div className="w-full h-full bg-gradient-to-br from-[#00e0ff]/20 via-[#8b5cf6]/20 to-[#07080c] flex items-center justify-center">
-                  <span className="text-6xl font-bold gradient-text opacity-40 select-none">FA</span>
+                  <span className="text-6xl font-bold gradient-text opacity-40 select-none">DN</span>
                 </div>
               )}
 
@@ -83,20 +84,20 @@ export default function About() {
                 </svg>
               </div>
 
-              {/* Top-right: "Available for work" pill badge */}
+              {/* Top-right: "Taking new projects" pill badge */}
               <div className="absolute top-3.5 sm:top-4 right-3.5 sm:right-4 z-20 flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-emerald-500/30 shadow-lg">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
                 </span>
                 <span className="font-mono text-[9px] sm:text-[10px] font-medium text-emerald-300">
-                  Available for work
+                  Taking new projects
                 </span>
               </div>
 
               {/* Bottom overlay: role tag pills directly on the photo */}
               <div className="absolute bottom-3.5 sm:bottom-4 inset-x-3 sm:inset-x-4 z-20 flex flex-wrap gap-1.5 sm:gap-2 justify-center">
-                {["Frontend", "DevOps", "Mobile"].map((tag) => (
+                {["Websites", "Apps", "Automation"].map((tag) => (
                   <span
                     key={tag}
                     className="font-mono text-[10px] sm:text-[11px] px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full border border-white/15 text-white/90 bg-black/60 backdrop-blur-md shadow-sm transition-colors hover:border-[#00e0ff]/40 hover:text-[#00e0ff]"
@@ -107,26 +108,15 @@ export default function About() {
               </div>
             </div>
 
-            {/* Below the photo card: Name, Location & Resume */}
+            {/* Below the photo card: Name, Title & Location */}
             <div className="text-center mt-4 flex flex-col items-center">
-              <h3 className="text-white font-bold text-xl">Faran Ahmad</h3>
-              <p className="font-mono text-xs text-zinc-400 mt-1">
-                📍 Pakistan
+              <h3 className="text-white font-bold text-xl">{siteConfig.founderName}</h3>
+              <p className="font-mono text-xs text-[#00e0ff] mt-0.5">
+                Founder, {siteConfig.brandName}
               </p>
-              <a
-                href={RESUME_PATH}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glow-btn glow-btn-outline text-xs px-4 py-2 mt-3 inline-flex items-center gap-2 group min-h-[44px]"
-              >
-                <svg className="w-3.5 h-3.5 text-[#00e0ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                Resume
-                <svg className="w-3 h-3 text-zinc-500 group-hover:text-[#00e0ff] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
-                </svg>
-              </a>
+              <p className="font-mono text-xs text-zinc-400 mt-1">
+                Pakistan • Serving clients worldwide
+              </p>
             </div>
           </motion.div>
 
@@ -138,45 +128,20 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-zinc-400 text-sm sm:text-base leading-relaxed"
+                className="text-zinc-300 text-sm sm:text-base leading-relaxed"
               >
-                Frontend-focused Software Engineer with hands-on internship
-                experience building responsive React and Angular SPAs,
-                cross-platform Flutter applications, and containerized
-                deployments with Docker. Proven ability to integrate RESTful
-                APIs, automate medical-report OCR pipelines (OpenCV &
-                Tesseract), and collaborate in agile teams using Git/GitHub.
-                Seeking a role where I can apply my full-stack frontend,
-                mobile, and DevOps skills to deliver production-grade software.
+                DevNest is a digital agency that turns business ideas into
+                working products. We build high-performance websites and mobile
+                apps, automate manual processes with smart workflows, and manage
+                social media accounts so brands stay active and grow. We work
+                with small businesses, startups and local brands, and we deliver
+                on time with clear communication.
               </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: shouldReduce ? 0 : 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: 0.15 }}
-                className="pt-1 flex flex-wrap gap-4 items-center"
-              >
-                <a
-                  href={RESUME_PATH}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="glow-btn glow-btn-primary text-xs inline-flex items-center gap-2 group min-h-[44px]"
-                >
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  View Full Resume
-                  <svg className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
-                  </svg>
-                </a>
-              </motion.div>
             </div>
 
-            {/* 4 highlight cards (1 col on mobile, 2 cols on sm+) */}
+            {/* 4 mini highlight cards (1 col on mobile, 2 cols on sm+) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
-              {highlights.map((h, i) => (
+              {agencyHighlights.map((h, i) => (
                 <motion.div
                   key={h.title}
                   initial={{ opacity: 0, y: shouldReduce ? 0 : 20 }}
@@ -195,7 +160,7 @@ export default function About() {
                     {h.items.map((item) => (
                       <span
                         key={item}
-                        className="font-mono text-[9px] sm:text-[10px] px-2 py-1 rounded-md border border-white/5 text-zinc-500 bg-white/[0.02]"
+                        className="font-mono text-[9px] sm:text-[10px] px-2 py-1 rounded-md border border-white/5 text-zinc-400 bg-white/[0.02]"
                       >
                         {item}
                       </span>
@@ -213,18 +178,26 @@ export default function About() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="glass-card p-5 sm:p-6 border-l-2 border-l-[#00e0ff]/30"
             >
-              <p className="text-zinc-300 italic text-sm sm:text-base leading-relaxed">
-                &ldquo;Great software connects clean code with real-world
-                deployment.&rdquo;
+              <p className="text-zinc-200 italic text-sm sm:text-base leading-relaxed">
+                &ldquo;We don&apos;t just deliver projects, we build the digital
+                systems your business grows on.&rdquo;
               </p>
               <div className="flex items-center gap-3 mt-4">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00e0ff]/30 to-[#8b5cf6]/30 flex items-center justify-center shrink-0">
-                  <span className="text-xs font-bold text-white">FA</span>
+                <div className="relative w-9 h-9 rounded-full overflow-hidden border border-white/10 shrink-0 bg-[#090a0f]">
+                  <Image
+                    src={PROFILE_IMAGE}
+                    alt={siteConfig.founderName}
+                    width={36}
+                    height={36}
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
                 <div>
-                  <p className="text-white text-xs font-medium">Faran Ahmad</p>
-                  <p className="font-mono text-[10px] text-zinc-600">
-                    Creator
+                  <p className="text-white text-xs font-semibold">
+                    {siteConfig.founderName}
+                  </p>
+                  <p className="font-mono text-[10px] text-zinc-400">
+                    Founder, {siteConfig.brandName}
                   </p>
                 </div>
               </div>

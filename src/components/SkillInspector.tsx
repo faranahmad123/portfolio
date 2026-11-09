@@ -15,7 +15,7 @@ export default function SkillInspector() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
         <SectionHeading
           number="02"
-          label="Core Stack"
+          label="Our Stack"
           subtitle="The toolkit."
         />
 

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { siteConfig } from "@/data/site";
 
 // Simple in-memory rate limiting: max 5 requests per 10 minutes per IP
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
@@ -99,43 +100,47 @@ export async function POST(req: NextRequest) {
     }
 
     const resend = new Resend(apiKey);
-    const recipientEmail = "contactfaranahmad@gmail.com";
+    // Recipient read from /data/site.ts
+    const recipientEmail = siteConfig.email;
+
+    // NOTE: Once devnest.codes domain is verified in Resend, change "onboarding@resend.dev" to e.g. "DevNest <hello@devnest.codes>"
+    const fromAddress = "DevNest Inquiries <onboarding@resend.dev>";
 
     const { data, error } = await resend.emails.send({
-      from: "Portfolio Inquiry <onboarding@resend.dev>",
+      from: fromAddress,
       to: recipientEmail,
       replyTo: trimmedContact.includes("@") ? trimmedContact : undefined,
-      subject: `New Portfolio Inquiry from ${trimmedName}`,
+      subject: `New DevNest Inquiry from ${trimmedName}`,
       text: [
-        `New Portfolio Inquiry:`,
+        `New DevNest Inquiry:`,
         `Name: ${trimmedName}`,
-        `Project Type: ${trimmedProjectType}`,
+        `Service / Project Type: ${trimmedProjectType}`,
         `Contact: ${trimmedContact}`,
         ``,
         `Message:`,
-        `Hi Faran, my name is ${trimmedName} and I am looking for a developer for ${trimmedProjectType}. You can reach me at ${trimmedContact} to discuss this further.`,
+        `Hi DevNest, my name is ${trimmedName} and I need ${trimmedProjectType} for my business. You can reach me at ${trimmedContact} to discuss this further.`,
       ].join("\n"),
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 28px; background-color: #07080c; color: #f4f4f5; border-radius: 16px; border: 1px solid #27272a;">
           <div style="margin-bottom: 20px;">
             <span style="font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #00e0ff; background-color: rgba(0, 224, 255, 0.1); border: 1px solid rgba(0, 224, 255, 0.2); padding: 4px 10px; border-radius: 20px;">
-              New Inquiry
+              New DevNest Inquiry
             </span>
             <h2 style="color: #ffffff; font-size: 22px; font-weight: 700; margin: 14px 0 6px 0;">
-              Portfolio Message Received
+              New Client Inquiry Received
             </h2>
             <p style="color: #a1a1aa; font-size: 14px; margin: 0;">
-              Someone reached out via your developer portfolio contact form.
+              Someone reached out via the DevNest website contact form.
             </p>
           </div>
 
           <div style="background-color: #0f1119; padding: 20px; border-radius: 12px; border: 1px solid #27272a; margin: 20px 0;">
             <p style="margin: 0 0 10px 0; font-size: 14px;">
-              <strong style="color: #a1a1aa; font-family: monospace; text-transform: uppercase; font-size: 11px;">Name:</strong><br />
+              <strong style="color: #a1a1aa; font-family: monospace; text-transform: uppercase; font-size: 11px;">Client Name:</strong><br />
               <span style="color: #ffffff; font-size: 16px; font-weight: 600;">${escapeHtml(trimmedName)}</span>
             </p>
             <p style="margin: 0 0 10px 0; font-size: 14px;">
-              <strong style="color: #a1a1aa; font-family: monospace; text-transform: uppercase; font-size: 11px;">Project Type:</strong><br />
+              <strong style="color: #a1a1aa; font-family: monospace; text-transform: uppercase; font-size: 11px;">Service / Project Type:</strong><br />
               <span style="color: #00e0ff; font-size: 15px;">${escapeHtml(trimmedProjectType)}</span>
             </p>
             <p style="margin: 0; font-size: 14px;">
@@ -145,11 +150,11 @@ export async function POST(req: NextRequest) {
           </div>
 
           <div style="background-color: #12131c; padding: 18px; border-radius: 12px; border-left: 3px solid #8b5cf6; font-style: italic; color: #e4e4e7; font-size: 14px; line-height: 1.6;">
-            &ldquo;Hi Faran, my name is <strong>${escapeHtml(trimmedName)}</strong> and I am looking for a developer for <strong>${escapeHtml(trimmedProjectType)}</strong>. You can reach me at <strong>${escapeHtml(trimmedContact)}</strong> to discuss this further.&rdquo;
+            &ldquo;Hi DevNest, my name is <strong>${escapeHtml(trimmedName)}</strong> and I need <strong>${escapeHtml(trimmedProjectType)}</strong> for my business. You can reach me at <strong>${escapeHtml(trimmedContact)}</strong> to discuss this further.&rdquo;
           </div>
 
           <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #1f2029; font-size: 11px; font-family: monospace; color: #71717a; text-align: center;">
-            Faran Ahmad Portfolio • Automatic Notification
+            DevNest • Automatic Notification
           </div>
         </div>
       `,

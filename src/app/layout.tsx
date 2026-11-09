@@ -1,48 +1,49 @@
 import type { Metadata } from "next";
 import { OG_IMAGE } from "@/lib/assets";
+import { siteConfig } from "@/data/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://faranahmad.dev"),
-  title: "Faran Ahmad | Software Engineer — React, Angular, Flutter & Docker",
+  metadataBase: new URL(siteConfig.siteUrl),
+  title: "DevNest | Website, App & Automation Agency",
   description:
-    "Frontend-focused Software Engineer building responsive React & Angular SPAs, cross-platform Flutter apps, and containerized deployments with Docker. Based in Pakistan.",
+    "DevNest builds websites, mobile apps, business automation and manages social media accounts for growing brands.",
   keywords: [
-    "Faran Ahmad",
-    "Software Engineer",
-    "React",
-    "Angular",
+    "DevNest",
+    "Digital Agency",
+    "Website Development",
+    "Mobile Apps",
+    "Business Automation",
+    "Social Media Management",
+    "Next.js",
     "Flutter",
-    "Docker",
-    "Frontend Developer",
-    "DevOps",
-    "TypeScript",
-    "Portfolio",
+    "Python",
+    "Workflows",
   ],
-  authors: [{ name: "Faran Ahmad" }],
-  creator: "Faran Ahmad",
+  authors: [{ name: siteConfig.brandName, url: siteConfig.siteUrl }],
+  creator: siteConfig.brandName,
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://faranahmad.dev",
-    title: "Faran Ahmad | Software Engineer",
+    url: siteConfig.siteUrl,
+    title: "DevNest | Website, App & Automation Agency",
     description:
-      "Frontend-focused Software Engineer building responsive React & Angular SPAs, cross-platform Flutter apps, and containerized deployments with Docker.",
-    siteName: "Faran Ahmad Portfolio",
+      "DevNest builds websites, mobile apps, business automation and manages social media accounts for growing brands.",
+    siteName: siteConfig.brandName,
     images: [
       {
         url: OG_IMAGE || "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Faran Ahmad — Software Engineer",
+        alt: "DevNest | Website, App & Automation Agency",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Faran Ahmad | Software Engineer",
+    title: "DevNest | Website, App & Automation Agency",
     description:
-      "Frontend-focused Software Engineer building responsive React & Angular SPAs, cross-platform Flutter apps, and containerized deployments with Docker.",
+      "DevNest builds websites, mobile apps, business automation and manages social media accounts for growing brands.",
     images: [OG_IMAGE || "/og-image.png"],
   },
   robots: {
@@ -52,26 +53,33 @@ export const metadata: Metadata = {
   },
 };
 
-// JSON-LD Person schema
+// JSON-LD ProfessionalService schema for DevNest
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Faran Ahmad",
-  jobTitle: "Software Engineer",
-  url: "https://faranahmad.dev",
-  email: "contactfaranahmad@gmail.com",
-  sameAs: [
-    "https://github.com/faranahmad123",
-    "https://linkedin.com/in/faran02",
-  ],
+  "@type": "ProfessionalService",
+  name: siteConfig.brandName,
+  url: siteConfig.siteUrl,
+  logo: `${siteConfig.siteUrl}${OG_IMAGE || "/og-image.png"}`,
+  image: `${siteConfig.siteUrl}${OG_IMAGE || "/og-image.png"}`,
+  description:
+    "DevNest builds websites, mobile apps, business automation and manages social media accounts for growing brands.",
+  email: siteConfig.email,
+  telephone: siteConfig.whatsappNumber,
+  founder: {
+    "@type": "Person",
+    name: siteConfig.founderName,
+  },
+  sameAs: [siteConfig.instagramUrl, siteConfig.whatsappLink],
   knowsAbout: [
+    "Website Development",
+    "Mobile App Development",
+    "Business Automation",
+    "Social Media Management",
+    "Next.js",
     "React",
-    "Angular",
     "Flutter",
-    "TypeScript",
-    "Docker",
     "Python",
-    "Firebase",
+    "APIs",
   ],
 };
 

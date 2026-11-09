@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 
 interface SectionHeadingProps {
-  number: string;
+  number?: string;
   label: string;
   subtitle: string;
 }
@@ -23,7 +23,7 @@ export default function SectionHeading({
       transition={{ duration: 0.6 }}
     >
       <p className="section-label">
-        {number} // {label}
+        {number ? `${number} // ` : ""}{label}
       </p>
       <h2 className="section-title mt-2">{subtitle}</h2>
       <div className="mt-4 w-16 h-[2px] bg-gradient-to-r from-[#00e0ff] to-[#8b5cf6] rounded-full" />

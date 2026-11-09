@@ -1,18 +1,35 @@
-# Faran Ahmad — Developer Portfolio
+# DevNest — Official Agency Website
 
-A premium, single-page developer portfolio built with **Next.js 16** (App Router), **TypeScript**, **Tailwind CSS v4**, and **Framer Motion**.
+The official website for **DevNest** (Websites, Apps & Automation), built with **Next.js 16** (App Router), **TypeScript**, **Tailwind CSS v4**, and **Framer Motion**.
 
 ## ✨ Features
 
 - 🎬 Cinematic intro with typing animation (skippable, shown once per session)
-- 🌙 Dark futuristic "engineer's console" aesthetic
-- 📱 Fully responsive, mobile-first design
-- 🎯 Interactive skill inspector with proficiency bars
+- 🌙 Dark futuristic agency console aesthetic
+- 📱 Fully responsive, mobile-first design with interactive phone mockup
+- 🎯 Interactive tech stack inspector with proficiency bars
+- 🛠️ Comprehensive service breakdown (Web, Mobile, Business Automation, Social Media)
 - 📂 Two-column project showcase (desktop) / swipeable carousel (mobile)
+- 🔄 4-step agency delivery process (Discovery, Design & Plan, Build & Test, Launch & Support)
 - 💬 Real email backend powered by **Resend** (`/api/contact`) with anti-spam honeypot & rate-limiting
+- 🟢 Direct WhatsApp quick-connect integration
 - ✨ Cursor glow, scroll animations, glassmorphism cards
-- 🔍 SEO-optimized: Open Graph, Twitter Cards, JSON-LD, dynamic sitemap, robots.txt
+- 🔍 SEO-optimized: Open Graph, Twitter Cards, ProfessionalService JSON-LD, dynamic sitemap, robots.txt
 - ♿ Accessible: semantic HTML, keyboard focus states, prefers-reduced-motion
+
+## ⚙️ Central Brand Configuration
+
+All brand details, contact endpoints, and social URLs are managed centrally in [`/src/data/site.ts`](src/data/site.ts):
+
+- `brandName`: "DevNest"
+- `tagline`: "Websites, Apps & Automation"
+- `siteUrl`: "https://devnest.codes"
+- `email`: "faranahmad@devnest.codes"
+- `whatsappNumber`: "+1 709 5073546"
+- `whatsappLink`: "https://wa.me/17095073546"
+- `instagramHandle`: "@getdevnest"
+- `instagramUrl`: "https://instagram.com/getdevnest"
+- `founderName`: "Faran Ahmad"
 
 ## 🚀 Quick Start
 
@@ -38,25 +55,19 @@ npm start
 
 ## 📧 Contact Form Setup (Resend)
 
-The portfolio includes a serverless API route at [`/src/app/api/contact/route.ts`](src/app/api/contact/route.ts) that sends inquiries directly to `contactfaranahmad@gmail.com`.
+The site includes a serverless API route at [`/src/app/api/contact/route.ts`](src/app/api/contact/route.ts) that sends client inquiries directly to `faranahmad@devnest.codes`.
 
 ### 1. Local Setup
-1. Sign up for a free account at [resend.com](https://resend.com).
+1. Sign up for an account at [resend.com](https://resend.com).
 2. Go to **API Keys** (`https://resend.com/api-keys`) and click **Create API Key**.
 3. Create a `.env.local` file in the project root:
    ```env
    RESEND_API_KEY=re_123456789abcdef...
    ```
-4. Restart your development server (`npm run dev`). When visitors submit the message composer, an email will be delivered to your inbox with the sender's details and message.
+4. Start your development server (`npm run dev`). Submitting the message composer will send an email with the inquiry details.
 
-### 2. Production Deployment (Vercel)
-1. In your [Vercel Dashboard](https://vercel.com), navigate to your project.
-2. Go to **Settings** → **Environment Variables**.
-3. Add a new variable:
-   - **Key**: `RESEND_API_KEY`
-   - **Value**: Your Resend API key (`re_...`)
-   - **Environments**: Check `Production`, `Preview`, and `Development`.
-4. Trigger a new deployment or push to GitHub.
+### 2. Domain Verification
+Once `devnest.codes` is verified in Resend, update the `from` address in `src/app/api/contact/route.ts` to `DevNest <hello@devnest.codes>`.
 
 ---
 
@@ -69,78 +80,38 @@ src/
 │   │   └── contact/
 │   │       └── route.ts     # Resend email API route (App Router POST)
 │   ├── globals.css          # Design system & theme tokens
-│   ├── layout.tsx           # Root layout with SEO metadata
+│   ├── layout.tsx           # Root layout with SEO metadata & JSON-LD
 │   ├── page.tsx             # Main page
-│   ├── sitemap.ts           # Dynamic sitemap
-│   └── robots.ts            # Robots.txt
+│   ├── sitemap.ts           # Dynamic sitemap (reads from site.ts)
+│   └── robots.ts            # Robots.txt (reads from site.ts)
 ├── components/
-│   ├── Intro.tsx            # Cinematic intro sequence
-│   ├── Navbar.tsx           # Sticky glass navbar
-│   ├── Hero.tsx             # Hero section with phone mockup
-│   ├── About.tsx            # About with profile card, resume & highlights
+│   ├── Intro.tsx            # Cinematic DevNest intro sequence
+│   ├── Navbar.tsx           # Sticky glass navbar with dev/nest logo
+│   ├── Hero.tsx             # Hero section with interactive phone mockup
+│   ├── About.tsx            # Who We Are & Founder card
 │   ├── SectionHeading.tsx   # Reusable section header
 │   ├── SkillInspector.tsx   # Interactive tech stack inspector
-│   ├── Services.tsx         # Expandable service cards
-│   ├── Projects.tsx         # Project showcase (desktop + mobile)
-│   ├── Experience.tsx       # Timeline cards
-│   ├── Certs.tsx            # Certificate/award cards
-│   ├── Contact.tsx          # Message composer with Resend API integration
-│   ├── Footer.tsx           # Footer
+│   ├── Services.tsx         # Expandable service offerings
+│   ├── Projects.tsx         # Selected work showcase (desktop + mobile)
+│   ├── HowWeWork.tsx        # 4-step delivery process timeline
+│   ├── Contact.tsx          # Message composer + WhatsApp integration
+│   ├── Footer.tsx           # Footer with copyright & social links
 │   ├── CursorGlow.tsx       # Mouse-following glow effect
 │   └── PortfolioClient.tsx  # Client-side shell
 ├── data/
-│   ├── projects.ts          # ← Edit project content & links here
-│   ├── skills.ts            # ← Edit tech stack here
-│   ├── services.ts          # ← Edit service offerings here
-│   ├── experience.ts        # ← Edit work experience here
-│   ├── certificates.ts      # ← Edit certs/awards here
-│   └── navigation.ts        # ← Edit links & social URLs here
+│   ├── site.ts              # ← Central brand & contact config
+│   ├── projects.ts          # ← Client projects & portfolio work
+│   ├── skills.ts            # ← Tech stack & automation toolkit
+│   ├── services.ts          # ← Agency offerings & capabilities
+│   ├── process.ts           # ← How We Work 4-step delivery process
+│   └── navigation.ts        # ← Nav links derived from site config
 ├── hooks/
 │   ├── useIntroSeen.ts      # Session-based intro visibility
 │   └── useCursorGlow.ts     # Cursor glow utility
 └── lib/
-    └── assets.ts            # ← Profile image, OG image & resume paths
+    └── assets.ts            # Image asset paths
 ```
-
-## 🖼️ Adding Your Images & Resume
-
-1. **Profile Photo**:
-   Place your photo at `/public/images/profile.jpeg`.
-
-2. **Project Screenshots**:
-   Place screenshots (16:9 ratio, ~1200×675 px recommended) in `/public/images/projects/`:
-   - `product-matching.png`
-   - `lifely.png`
-   - `crm-dashboard.png`
-   - `study-planner.png`
-   - `qr-attendance.png`
-
-3. **Resume PDF**:
-   Place your resume at `/public/resume.pdf`.
-
-## 🔗 Updating Links
-
-Edit `src/data/navigation.ts` to update:
-- Email, phone, WhatsApp
-- LinkedIn and GitHub URLs
-
-## 🌐 Deploy to Vercel
-
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel --prod
-```
-
-Or connect your GitHub repository to [vercel.com](https://vercel.com) for automatic CI/CD deployments.
-
-After deploying, update your production URL in:
-- `src/app/layout.tsx` (`metadataBase`)
-- `src/app/sitemap.ts`
-- `src/app/robots.ts`
 
 ## 📄 License
 
-MIT — feel free to use and customize.
+MIT — DevNest.

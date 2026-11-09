@@ -2,13 +2,13 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import {
-  Github,
-  Linkedin,
+  Instagram,
+  MessageCircle,
   Mail,
   ChevronDown,
-  FileText,
+  ArrowRight,
 } from "lucide-react";
-import { socialLinks } from "@/data/navigation";
+import { siteConfig } from "@/data/site";
 import PhoneMockup from "./PhoneMockup";
 
 export default function Hero() {
@@ -40,9 +40,9 @@ export default function Hero() {
             initial="hidden"
             animate="visible"
             custom={0}
-            className="section-label mb-3 sm:mb-4"
+            className="section-label mb-3 sm:mb-4 tracking-widest uppercase font-mono"
           >
-            Software Engineer
+            DIGITAL AGENCY
           </motion.p>
 
           <motion.h1
@@ -52,8 +52,7 @@ export default function Hero() {
             custom={1}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.08] tracking-tight"
           >
-            Faran{" "}
-            <span className="gradient-text">Ahmad</span>
+            Dev<span className="gradient-text">Nest</span>
           </motion.h1>
 
           <motion.p
@@ -63,7 +62,7 @@ export default function Hero() {
             custom={2}
             className="mt-3 sm:mt-4 font-mono text-xs sm:text-sm text-zinc-400"
           >
-            Frontend & DevOps
+            Websites • Apps • Automation • Social Media
           </motion.p>
 
           <motion.p
@@ -73,10 +72,10 @@ export default function Hero() {
             custom={3}
             className="mt-4 sm:mt-6 text-zinc-400 text-sm sm:text-base leading-relaxed max-w-lg"
           >
-            Frontend-focused Software Engineer with hands-on experience
-            building responsive React and Angular SPAs, cross-platform
-            Flutter apps, and containerized deployments with Docker. Passionate
-            about turning complex requirements into clean, scalable code.
+            We help businesses grow online. DevNest designs and develops fast,
+            modern websites and mobile apps, automates repetitive business work,
+            and handles your social media accounts, so you can focus on running
+            your business.
           </motion.p>
 
           {/* Action Buttons */}
@@ -94,13 +93,11 @@ export default function Hero() {
               View Projects
             </a>
             <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#contact"
               className="glow-btn glow-btn-outline min-h-[44px] flex items-center justify-center text-xs sm:text-sm gap-2"
             >
-              <FileText size={16} />
-              Resume
+              Get a Free Quote
+              <ArrowRight size={15} className="text-[#00e0ff]" />
             </a>
           </motion.div>
 
@@ -113,9 +110,21 @@ export default function Hero() {
             className="mt-7 sm:mt-8 flex gap-3 sm:gap-4"
           >
             {[
-              { icon: Github, href: socialLinks.github, label: "GitHub" },
-              { icon: Linkedin, href: socialLinks.linkedin, label: "LinkedIn" },
-              { icon: Mail, href: `mailto:${socialLinks.email}`, label: "Email" },
+              {
+                icon: Instagram,
+                href: siteConfig.instagramUrl,
+                label: `Instagram (${siteConfig.instagramHandle})`,
+              },
+              {
+                icon: MessageCircle,
+                href: siteConfig.whatsappLink,
+                label: "WhatsApp",
+              },
+              {
+                icon: Mail,
+                href: `mailto:${siteConfig.email}`,
+                label: "Email",
+              },
             ].map(({ icon: Icon, href, label }) => (
               <a
                 key={label}
