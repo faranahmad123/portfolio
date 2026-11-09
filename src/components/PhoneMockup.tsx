@@ -8,12 +8,6 @@ import { siteConfig } from "@/data/site";
 
 const CYCLE_MS = 3500;
 
-const taglines = [
-  "Build. Automate. Grow.",
-  "Websites, apps and smart business workflows.",
-  "Digital systems built to scale.",
-];
-
 const serviceChips = [
   { label: "Websites", desc: "Next.js • React • Tailwind", color: "text-[#00e0ff]", border: "border-[#00e0ff]/30 bg-black/60" },
   { label: "Mobile Apps", desc: "Flutter • iOS • Android", color: "text-[#8b5cf6]", border: "border-[#8b5cf6]/30 bg-black/60" },
@@ -26,42 +20,37 @@ const floatingChips = [
     label: "Websites",
     delay: 0,
     className:
-      "top-[-12px] left-3 sm:top-[14%] sm:left-auto sm:right-[calc(100%+14px)] lg:right-[calc(100%+16px)]",
+      "top-[14%] right-[calc(100%+12px)] lg:right-[calc(100%+16px)]",
   },
   {
     label: "Mobile Apps",
     delay: 0.5,
     className:
-      "top-[-12px] right-3 sm:top-[30%] sm:right-auto sm:left-[calc(100%+14px)] lg:left-[calc(100%+16px)]",
+      "top-[30%] left-[calc(100%+12px)] lg:left-[calc(100%+16px)]",
   },
   {
     label: "Automation",
     delay: 1,
     className:
-      "hidden sm:inline-flex sm:top-[58%] sm:left-auto sm:right-[calc(100%+14px)] lg:right-[calc(100%+16px)]",
+      "top-[58%] right-[calc(100%+12px)] lg:right-[calc(100%+16px)]",
   },
   {
     label: "Social Media",
     delay: 1.5,
     className:
-      "hidden sm:inline-flex sm:top-[74%] sm:right-auto sm:left-[calc(100%+14px)] lg:left-[calc(100%+16px)]",
+      "top-[74%] left-[calc(100%+12px)] lg:left-[calc(100%+16px)]",
   },
 ];
 
 export default function PhoneMockup() {
   const shouldReduce = useReducedMotion();
   const [activeScreen, setActiveScreen] = useState(0);
-  const [taglineIdx, setTaglineIdx] = useState(0);
   const [paused, setPaused] = useState(false);
   const [imgError, setImgError] = useState(false);
   const totalScreens = 3;
 
   const advance = useCallback(() => {
-    setActiveScreen((prev) => {
-      const next = (prev + 1) % totalScreens;
-      if (next === 2) setTaglineIdx((t) => (t + 1) % taglines.length);
-      return next;
-    });
+    setActiveScreen((prev) => (prev + 1) % totalScreens);
   }, [totalScreens]);
 
   useEffect(() => {
@@ -78,13 +67,13 @@ export default function PhoneMockup() {
 
   return (
     <div
-      className="relative flex justify-center select-none w-full max-w-full"
+      className="relative flex flex-col items-center select-none w-full max-w-full"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* Phone container providing the positioning context for the surrounding floating chips */}
+      {/* Phone container providing positioning context for tablet/desktop floating chips */}
       <div className="relative">
-        {/* Floating tech chips positioned around the phone frame */}
+        {/* Tablet & Desktop Floating chips (hidden on mobile below 768px md: breakpoint) */}
         {floatingChips.map((chip) => (
           <motion.span
             key={chip.label}
@@ -106,17 +95,17 @@ export default function PhoneMockup() {
                     },
                   }
             }
-            className={`absolute z-20 inline-flex items-center whitespace-nowrap w-auto rounded-full border border-white/10 bg-[#07080c]/85 text-zinc-400 font-mono text-[10px] sm:text-xs px-2.5 py-1 sm:px-3 sm:py-1.5 backdrop-blur-md shadow-lg pointer-events-none select-none ${chip.className}`}
+            className={`hidden md:inline-flex absolute z-20 items-center whitespace-nowrap w-auto rounded-full border border-white/10 bg-[#07080c]/85 text-zinc-400 font-mono text-xs px-2.5 py-1 lg:px-3 lg:py-1.5 backdrop-blur-md shadow-lg pointer-events-none select-none ${chip.className}`}
           >
             {chip.label}
           </motion.span>
         ))}
 
         {/* Realistic Phone Frame */}
-        <div className="relative w-[260px] min-[375px]:w-[280px] sm:w-[320px] md:w-[340px] h-[520px] min-[375px]:h-[560px] sm:h-[640px] md:h-[670px] max-w-[calc(100vw-3rem)] rounded-[2.5rem] sm:rounded-[3.2rem] bg-[#07080c] p-[7px] sm:p-[10px] shadow-2xl shadow-[#00e0ff]/10 border border-white/15 ring-1 ring-white/5 flex flex-col justify-between z-10 shrink-0">
+        <div className="relative w-[260px] min-[375px]:w-[280px] sm:w-[320px] md:w-[340px] h-[520px] min-[375px]:h-[560px] sm:h-[640px] md:h-[670px] max-w-[calc(100vw-3rem)] rounded-[2.5rem] sm:rounded-[3.2rem] bg-[#07080c] shadow-2xl shadow-[#00e0ff]/10 border border-white/15 ring-1 ring-white/5 z-10 shrink-0">
           
-          {/* Phone screen container (Full-bleed content with rounded inner display) */}
-          <div className="relative w-full flex-1 rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden bg-[#07080c]">
+          {/* Inner Phone Screen Container: fills bezel exactly, zero double border */}
+          <div className="absolute inset-[7px] sm:inset-[10px] rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden bg-[#07080c]">
             
             {/* Full-bleed Photo using next/image with fill */}
             {!imgError ? (
@@ -180,8 +169,8 @@ export default function PhoneMockup() {
               </span>
             </div>
 
-            {/* Overlaid UI content directly on the photo inside bottom gradient area */}
-            <div className="absolute inset-x-0 bottom-0 p-4 sm:p-6 z-20 flex flex-col justify-end min-h-[190px] sm:min-h-[220px]">
+            {/* Overlaid UI content directly on the photo inside bottom gradient area (padded safely above dots) */}
+            <div className="absolute inset-x-0 bottom-12 sm:bottom-14 p-4 sm:p-6 z-20 flex flex-col justify-end min-h-[190px] sm:min-h-[220px]">
               <AnimatePresence mode="wait">
                 {/* Screen 0: Lock-screen style widget with DevNest & Founder */}
                 {activeScreen === 0 && (
@@ -272,30 +261,49 @@ export default function PhoneMockup() {
                 )}
               </AnimatePresence>
             </div>
-          </div>
 
-          {/* Bottom bezel area: pagination dots & home indicator bar */}
-          <div className="pt-1.5 sm:pt-2 pb-1 flex flex-col items-center gap-1.5 sm:gap-2">
-            {/* Pagination dots indicating multiple screens */}
-            <div className="flex items-center gap-1.5 py-1">
-              {Array.from({ length: totalScreens }).map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveScreen(i)}
-                  aria-label={`Go to screen ${i + 1}`}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    i === activeScreen
-                      ? "w-4 sm:w-5 bg-[#00e0ff] shadow-sm shadow-[#00e0ff]/50"
-                      : "w-1.5 bg-white/20 hover:bg-white/40"
-                  }`}
-                />
-              ))}
+            {/* Bottom bezel area: pagination dots & home indicator bar */}
+            <div className="absolute bottom-0 inset-x-0 pb-2 sm:pb-2.5 pt-1 flex flex-col items-center gap-1.5 sm:gap-2 z-30 pointer-events-auto">
+              {/* Pagination dots indicating multiple screens */}
+              <div className="flex items-center gap-1.5 py-1">
+                {Array.from({ length: totalScreens }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveScreen(i)}
+                    aria-label={`Go to screen ${i + 1}`}
+                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                      i === activeScreen
+                        ? "w-4 sm:w-5 bg-[#00e0ff] shadow-sm shadow-[#00e0ff]/50"
+                        : "w-1.5 bg-white/20 hover:bg-white/40"
+                    }`}
+                  />
+                ))}
+              </div>
+
+              {/* Realistic home indicator bar */}
+              <div className="w-20 sm:w-24 h-1 rounded-full bg-white/20" />
             </div>
-
-            {/* Realistic home indicator bar */}
-            <div className="w-20 sm:w-24 h-1 rounded-full bg-white/20" />
           </div>
         </div>
+      </div>
+
+      {/* Mobile chips row (rendered cleanly directly BELOW the phone frame on mobile < 768px) */}
+      <div className="flex md:hidden flex-wrap justify-center items-center gap-2 mt-5 sm:mt-6 w-full max-w-sm px-2">
+        {floatingChips.map((chip, i) => (
+          <motion.span
+            key={chip.label}
+            initial={{ opacity: 0, y: shouldReduce ? 0 : 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.35,
+              delay: shouldReduce ? 0 : i * 0.08,
+              ease: "easeOut",
+            }}
+            className="inline-flex items-center whitespace-nowrap px-3 py-1.5 text-[11px] font-mono rounded-full border border-white/10 bg-[#07080c]/85 text-zinc-400 backdrop-blur-md shadow-lg pointer-events-none select-none"
+          >
+            {chip.label}
+          </motion.span>
+        ))}
       </div>
     </div>
   );
