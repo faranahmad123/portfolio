@@ -2,7 +2,7 @@
 // 📂 PROJECTS DATA — DevNest Client & Production Work
 // ============================================================
 
-export const DESIHUB_IMAGE = "YOUR_PROJECT_IMAGE_URL_HERE";
+export const DESIHUB_IMAGE = "/images/projects/desihub.png";
 export const CLIENT_PROJECT_2_IMAGE = "YOUR_PROJECT_IMAGE_URL_HERE";
 export const CLIENT_PROJECT_3_IMAGE = "YOUR_PROJECT_IMAGE_URL_HERE";
 export const CLIENT_PROJECT_4_IMAGE = "YOUR_PROJECT_IMAGE_URL_HERE";
