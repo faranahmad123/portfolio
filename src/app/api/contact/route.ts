@@ -103,8 +103,8 @@ export async function POST(req: NextRequest) {
     // Recipient read from /data/site.ts
     const recipientEmail = siteConfig.email;
 
-    // NOTE: Once devnest.codes domain is verified in Resend, change "onboarding@resend.dev" to e.g. "DevNest <hello@devnest.codes>"
-    const fromAddress = "DevNest Inquiries <onboarding@resend.dev>";
+    // Verified domain sender address
+    const fromAddress = "DevNest <faranahmad@devnest.codes>";
 
     const { data, error } = await resend.emails.send({
       from: fromAddress,
