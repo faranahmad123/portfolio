@@ -5,10 +5,10 @@ import { useIntroSeen } from "@/hooks/useIntroSeen";
 import Intro from "@/components/Intro";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import SkillInspector from "@/components/SkillInspector";
-import Services from "@/components/Services";
+import TechStrip from "@/components/TechStrip";
 import Projects from "@/components/Projects";
+import Services from "@/components/Services";
+import About from "@/components/About";
 import HowWeWork from "@/components/HowWeWork";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -33,10 +33,10 @@ export default function PortfolioClient() {
       <Navbar />
       <main className="w-full max-w-full overflow-x-hidden">
         <Hero />
-        <About />
-        <SkillInspector />
-        <Services />
+        <TechStrip />
         <Projects />
+        <Services />
+        <About />
         <HowWeWork />
         <Contact />
       </main>

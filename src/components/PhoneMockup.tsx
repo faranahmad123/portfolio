@@ -193,10 +193,11 @@ export default function PhoneMockup() {
                     <p className="text-xs sm:text-sm font-medium text-zinc-300 mt-1 sm:mt-1.5">
                       Founded by {siteConfig.founderName}
                     </p>
-                    <div className="mt-2.5 sm:mt-3 flex items-center gap-1.5 sm:gap-2 pt-2 border-t border-white/10 font-mono text-[9px] sm:text-[10px] text-zinc-400">
-                      <span>📍 Global</span>
-                      <span className="text-zinc-600">•</span>
-                      <span className="text-[#00e0ff]">Web • Apps • Automation</span>
+                    <div className="mt-2.5 sm:mt-3 pt-2 border-t border-white/10 font-mono text-[9px] sm:text-[10px] text-zinc-400 space-y-0.5">
+                      <p className="flex items-center gap-1 text-zinc-300">
+                        <span>📍 Based in Pakistan, working worldwide</span>
+                      </p>
+                      <p className="text-[#00e0ff]">Web • Apps • Automation • Social Media</p>
                     </div>
                   </motion.div>
                 )}

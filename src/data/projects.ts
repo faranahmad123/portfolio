@@ -177,7 +177,7 @@ export const projects: Project[] = [
     tags: ["AI", "Machine Learning", "Python", "TensorFlow", "Gradio"],
     date: "February 2026",
     description:
-      "End-to-end ML system that identifies when the same product is listed across different e-commerce platforms (Amazon, eBay, Walmart, AliExpress) despite differing titles, formatting, and pricing — powering use cases like price-comparison engines and catalog deduplication.",
+      "An automated matching system that identifies and links identical products across e-commerce platforms, even with differing titles and prices. It powers real-time price comparisons and eliminates duplicate listings to streamline catalog management.",
     bullets: [
       "Engineered a dual-branch Siamese neural network (TensorFlow/Keras) combining Word2Vec embeddings with structured NLP features (brand, category, specs, language detection) to output a pairwise similarity score.",
       "Built a smart pair-sampling pipeline generating balanced positive/negative training pairs (~30K total) from clustered product data, with EarlyStopping and learning-rate scheduling for robust training.",

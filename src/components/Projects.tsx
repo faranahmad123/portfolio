@@ -54,7 +54,7 @@ export default function Projects() {
     <section id="work" className="py-24 md:py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
         <SectionHeading
-          number="04"
+          number="01"
           label="Projects"
           subtitle="Selected work."
         />
@@ -189,16 +189,22 @@ export default function Projects() {
                     </div>
 
                     {/* Links */}
-                    <div className="flex gap-3 mt-6">
-                      <a
-                        href={activeProject.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="glow-btn glow-btn-primary text-xs inline-flex items-center gap-2 min-h-[44px]"
-                      >
-                        <ExternalLink size={14} />
-                        Live Demo
-                      </a>
+                    <div className="flex flex-wrap items-center gap-3 mt-6">
+                      {activeProject.liveUrl && activeProject.liveUrl !== "#" ? (
+                        <a
+                          href={activeProject.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="glow-btn glow-btn-primary text-xs inline-flex items-center gap-2 min-h-[44px]"
+                        >
+                          <ExternalLink size={14} />
+                          Live Demo
+                        </a>
+                      ) : (
+                        <span className="px-4 py-2.5 rounded-xl text-xs font-mono border border-white/10 bg-white/[0.02] text-zinc-500 cursor-not-allowed select-none inline-flex items-center min-h-[44px]">
+                          Case Study Coming Soon
+                        </span>
+                      )}
                       {activeProject.githubUrl && activeProject.githubUrl !== "#" && (
                         <a
                           href={activeProject.githubUrl}
@@ -312,15 +318,21 @@ export default function Projects() {
 
                     {/* Action buttons */}
                     <div className="flex gap-2.5 mt-5 pt-3 border-t border-white/5">
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="glow-btn glow-btn-primary text-xs !py-2.5 flex-1 inline-flex items-center justify-center gap-1.5 min-h-[44px]"
-                      >
-                        <ExternalLink size={14} />
-                        Demo
-                      </a>
+                      {project.liveUrl && project.liveUrl !== "#" ? (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="glow-btn glow-btn-primary text-xs !py-2.5 flex-1 inline-flex items-center justify-center gap-1.5 min-h-[44px]"
+                        >
+                          <ExternalLink size={14} />
+                          Live Demo
+                        </a>
+                      ) : (
+                        <span className="text-[11px] font-mono border border-white/10 bg-white/[0.02] text-zinc-500 rounded-xl px-3 py-2.5 flex-1 inline-flex items-center justify-center cursor-not-allowed select-none min-h-[44px] text-center">
+                          Case Study Coming Soon
+                        </span>
+                      )}
                       {project.githubUrl && project.githubUrl !== "#" ? (
                         <a
                           href={project.githubUrl}

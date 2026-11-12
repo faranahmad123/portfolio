@@ -14,7 +14,7 @@ export default function Services() {
     <section id="services" className="py-24 md:py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
         <SectionHeading
-          number="03"
+          number="02"
           label="Offerings"
           subtitle="What we do."
         />

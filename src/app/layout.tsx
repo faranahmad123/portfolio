@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   title: "DevNest | Website, App & Automation Agency",
   description:
     "DevNest builds websites, mobile apps, business automation and manages social media accounts for growing brands.",
+  icons: {
+    icon: "/images/logo.png",
+    shortcut: "/images/logo.png",
+    apple: "/images/logo.png",
+  },
   keywords: [
     "DevNest",
     "Digital Agency",
@@ -59,8 +64,8 @@ const jsonLd = {
   "@type": "ProfessionalService",
   name: siteConfig.brandName,
   url: siteConfig.siteUrl,
-  logo: `${siteConfig.siteUrl}${OG_IMAGE || "/og-image.png"}`,
-  image: `${siteConfig.siteUrl}${OG_IMAGE || "/og-image.png"}`,
+  logo: `${siteConfig.siteUrl}/images/logo.png`,
+  image: `${siteConfig.siteUrl}/images/logo.png`,
   description:
     "DevNest builds websites, mobile apps, business automation and manages social media accounts for growing brands.",
   email: siteConfig.email,

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { navLinks } from "@/data/navigation";
 
@@ -36,10 +37,20 @@ export default function Navbar() {
           {/* Logo */}
           <a
             href="#"
-            className="font-mono text-sm text-white hover:text-[#00e0ff] transition-colors py-2"
-            aria-label="Back to top"
+            className="flex items-center gap-2.5 py-2 group"
+            aria-label="DevNest - Back to top"
           >
-            dev<span className="text-[#00e0ff]">/</span>nest
+            <Image
+              src="/images/logo.png"
+              alt="DevNest logo"
+              width={32}
+              height={32}
+              priority
+              className="w-8 h-8 rounded-lg object-contain transition-transform group-hover:scale-105"
+            />
+            <span className="font-mono text-sm tracking-tight text-white group-hover:text-[#00e0ff] transition-colors">
+              dev<span className="text-[#00e0ff]">/</span>nest
+            </span>
           </a>
 
           {/* Desktop links */}

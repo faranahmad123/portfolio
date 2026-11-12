@@ -14,6 +14,7 @@ export default function HowWeWork() {
     <section id="process" className="py-24 md:py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full">
         <SectionHeading
+          number="04"
           label="Process"
           subtitle="How we work."
         />
